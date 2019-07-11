@@ -1,6 +1,12 @@
 \documentclass[twoside, 11pt]{book}
 
 \usepackage{TextbookPreamble}
+\usepackage{subfiles}
+
+\makeatletter
+\providecommand*{\input@path}{}
+\g@addto@macro\input@path{{./VectorMeasures//}{./VectorMeasures/Sections//}{./Sections//}}
+\makeatother
 
 
 \begin{document}
@@ -9,23 +15,14 @@
 
 \tableofcontents
 
-
+% Information: Copyright, ISBN, etc.
+% Preface
 
 
 
 \mainmatter
-\chapter{Complex Measures and Vector Measures}
-\include{Sections/Introduction}
-
-\include{Sections/DefsAndPrereq} %?
-
-\include{Sections/ComplexMeasures}
-
-\include{Sections/VectorMeasures}
-
-\include{Sections/FunkAnProof} %?
-
-\include{Sections/Perspective} %?
+%\input{VectorMeasures/VectorMeasures}
+\subfile{VectorMeasures/VectorMeasures.tex}
 
 
 
@@ -33,6 +30,7 @@
 \backmatter
 \include{Bibliography}
 
+% Index/Glossary. \printindex
 
 
 

@@ -26,6 +26,7 @@ The Textbook is an open source project, which means you are free to help in any 
 - Unifying Notation?
     - For instance, should the powerset be denoted the same in all textbooks, and if so, how should it be written.
     - Make macros
+- Index/Glossary
 
 ### Minor tasks
 - Continuous Spell checking
