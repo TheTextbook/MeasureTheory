@@ -213,7 +213,7 @@ For $\mu \in M(X, \m{A})$
 \end{align*}
 \end{lemma}
 \begin{proof}
-The first inequality follows from $|\mu(A)| \le |\mu|(A)\le |\mu|(X) \le \n{\mu}$.
+The first inequality follows from $|\mu(A)| \le |\mu|(A)\le |\mu|(X) \le \norm{\mu}$.
 
 Let $A_{1},\dots,A_{n}\in \m{A}$ be pairwise disjoint. By \Cref{lem: weird pi inequality} there exists a subset $S\subseteq \{1,\dots, n\}$ such that
 \begin{align*}
@@ -411,7 +411,7 @@ First we assume that $\nu$ is a positive bounded measure on $\m{A}$. Find $w$ as
 \begin{align*}
 	\int_{X}fd\varphi = \int_{X}fd\nu + \int_{X}fwd\mu
 \end{align*}
-for $f=\mathbbm{1}_{A}$, $A\in \m{A}$, hence for simple $f$, hence for any non-negative measurable $f$.
+for $f=\ind{A}$, $A\in \m{A}$, hence for simple $f$, hence for any non-negative measurable $f$.
 
 If $f\in L^{2}(\varphi)$, the Schwarz inequality gives
 \begin{align*}
@@ -429,7 +429,7 @@ for every $f\in L^{2}(\varphi)$.
 
 We see that $g$ is defined uniquely as an element of $L^{2}(\varphi)$, though it is only $\varphi$-a.e. unique as a point function on $X$.
 
-Apply \eqref{eq: functional as inner product} to $f=\mathbbm{1}_{A}$ for any $A\in \m{A}$, with $\varphi(A)>0$. Then \eqref{eq: functional as inner product} becomes
+Apply \eqref{eq: functional as inner product} to $f=\ind{A}$ for any $A\in \m{A}$, with $\varphi(A)>0$. Then \eqref{eq: functional as inner product} becomes
 \begin{align*}
 	\nu(A)=\int_{A}gd\varphi
 \end{align*}
@@ -453,11 +453,11 @@ and define positive bounded measures $\nu_{a}$ and $\nu_{s}$ by
 	\nu_{a}(B)=\nu(A\cap B), \qquad \nu_{s}(B)=\nu(S\cap B), \qquad \forall B\in \m{A}
 \end{align*}
 such that $\nu=\nu_{a}+\nu_{s}$.
-If $f=\mathbbm{1}_{S}$ in \eqref{eq: rewriting}, the left side becomes $0$, and the right side becomes $\int_{S}wd\mu$. So since $w(x)>0$ for all $x\in X$, we see that $\mu(S)=0$, and thus $\nu_{s} \perp \mu$.
+If $f=\ind{S}$ in \eqref{eq: rewriting}, the left side becomes $0$, and the right side becomes $\int_{S}wd\mu$. So since $w(x)>0$ for all $x\in X$, we see that $\mu(S)=0$, and thus $\nu_{s} \perp \mu$.
 
 Since $g$ is bounded, we can replace $f$ in \eqref{eq: rewriting} by
 \begin{align*}
-	f=\mathbbm{1}_{B}(1+g+g^{2}+\dots+g^{n})
+	f=\ind{B}(1+g+g^{2}+\dots+g^{n})
 \end{align*}
 for $n=1,2, \dots$ and $B\in \m{A}$. Writing \eqref{eq: rewriting} we get
 \begin{align}
@@ -578,15 +578,16 @@ Let $\mu$ be a positive measure, suppose $1\le p \le \infty$, and let $q$ be the
 \begin{align*}
 	T_{g}(f)=\int_{X}fgd\mu,
 \end{align*}
-then $T_{g}$ is a bounded linear functional on $L^{p}(\mu)$ with norm at most $\n{g}_{q}$. But do all bounded linear functionals on $L^{p}(\mu)$ have this form, and is this form unique? Essentially we are asking whether $L^{p}(\mu)^{*}=L^{q}(\mu)$ (isometric isomorphism). We shall now attempt to answer this question.
+then $T_{g}$ is a bounded linear functional on $L^{p}(\mu)$ with norm at most $\norm[q]{g}$. But do all bounded linear functionals on $L^{p}(\mu)$ have this form, and is this form unique? Essentially we are asking whether $L^{p}(\mu)^{*}=L^{q}(\mu)$ (isometric isomorphism). We shall now attempt to answer this question.
 
 For $p=\infty$ the answer is negative: 
 
 Let $f$ be any extreme point in the closed unit ball of $L^{1}([0,1], m)$ where $m$ is the Lebesgue measure. Let $F:[0,1] \to [0,1]$ be defined by $F(t)=\int_{[0,t]}|f(x)|dm(x)$, then $F$ is continuous, since for all $t_{0},t_{1}\in [0,1]$ (assume without loss of generality that $t_{0}<t_{1}$) we have
 \begin{align*}
-	|F(t_{0})-F(t_{1})|=\left| \int_{t_{1}}^{t_{0}}|f(x)|dm(x) \right| \le \n{f}_{1}|t_{0}-t_{1}|.
+	|F(t_{0})-F(t_{1})|=\left| \int_{t_{1}}^{t_{0}}|f(x)|dm(x) \right| \le \norm[1]{f}|t_{0}-t_{1}|.
 \end{align*}
-With this, we also see that $\n{F}\le\n{f}_{1}<\infty$. Since $F$ is continuous there exists a $c\in [0,1]$ such that $F(c)=\frac{1}{2}\n{f}_{1}$. Put $g_{1}=2f|_{[0,c]}$ and $g_{2}=2f|_{[c,1]}$, thus $g_{1},g_{2}$ both lie in the closed unit ball of $L^{1}([0,1],m)$. But $g_{1}\neq f \neq g_{2}$ and $f=\frac{1}{2}(g_{1}+g_{2})$ which is in contradiction with the assumption that $f$ was in the closed unit ball. Hence the closed unit ball of $L^{1}([0,1], m)$ has no extreme points.
+With this, we also see that $\norm{F}\le\norm[1]{f}<\infty$. Since $F$ is continuous there exists a $c\in [0,1]$ such that $F(c)=\frac{1}{2}\norm[1]{f}$.
+Put $g_{1}=2f|_{[0,c]}$ and $g_{2}=2f|_{[c,1]}$, thus $g_{1},g_{2}$ both lie in the closed unit ball of $L^{1}([0,1],m)$. But $g_{1}\neq f \neq g_{2}$ and $f=\frac{1}{2}(g_{1}+g_{2})$ which is in contradiction with the assumption that $f$ was in the closed unit ball. Hence the closed unit ball of $L^{1}([0,1], m)$ has no extreme points.
 
 Now if $L^{1}([0,1],m)$ was the dual of a Banach space, its closed unit ball would, by the Krein-Milman theorem, have extreme points, therefore from what we have just shown, $L^{1}([0,1], m)$ is not a dual space of a Banach space.
 
@@ -599,58 +600,58 @@ Suppose $1\le p < \infty$, $\mu$ is a $\sigma$-finite positive measure on $X$ an
 \end{align}
 Moreover, if $T$ and $g$ are related as in \eqref{eq: related T and g}, then
 \begin{align}
-	\n{T}=\n{g}_{q}. \label{eq: equality of norms}
+	\norm{T}=\norm[q]{g}. \label{eq: equality of norms}
 \end{align}
 In other words, $L^{q}(\mu)=L^{p}(\mu)^{*}$ (isometric isomorphism).
 \end{theorem}
 \begin{proof}
 If $g,g'$ satisfy \eqref{eq: related T and g} then for any $A\in \m{A}$ with $\mu(A)<\infty$ we have 
 \begin{align*}
-	\int_{A}g-g'd\mu=\int_{A}\mathbbm{1}_{A}gd\mu-\int_{A}\mathbbm{1}_{A}g'd\mu=T(\mathbbm{1}_{A})-T(\mathbbm{1}_{A})=0
+	\int_{A}g-g'd\mu=\int_{A}\ind{A}gd\mu-\int_{A}\ind{A}g'd\mu=T(\ind{A})-T(\ind{A})=0
 \end{align*}
 and the $\sigma$-finiteness of $\mu$ implies therefore that $g=g'$ $\mu$ almost everywhere, proving the uniqueness of $g$.
 
 If \eqref{eq: related T and g} holds, then Hölder's inequality implies
 \begin{align*}
-	\n{T}\le \n{g}_{q}.
+	\norm{T}\le \norm[q]{g}.
 \end{align*}
-So it remains to prove that $g$ exists and that $\n{T}\ge \n{g}_{q}$. If $\n{T}=0$, then \eqref{eq: related T and g} and \eqref{eq: equality of norms} holds with $g\equiv 0$. So we can assume $\n{T}>0$.
+So it remains to prove that $g$ exists and that $\norm{T}\ge \norm[q]{g}$. If $\norm{T}=0$, then \eqref{eq: related T and g} and \eqref{eq: equality of norms} holds with $g\equiv 0$. So we can assume $\norm{T}>0$.
 
 We first consider the case when $\mu(X)<\infty$. For any $A\in \m{A}$ define
 \begin{align*}
-	\nu(A)=T(\mathbbm{1}_{A}).
+	\nu(A)=T(\ind{A}).
 \end{align*}
-Now $T$ is linear, and $\mathbbm{1}_{A\cup B}=\mathbbm{1}_{A}+\mathbbm{1}_{B}$ if $A\cap B=\emptyset$, so $\nu$ is additive. To show countable additivity, let $\{A_{i}\}$ be a countable partition of $A$, let $B_{k}=\bigcup_{1}^{k}A_{i}$, and observe that
+Now $T$ is linear, and $\ind{A\cup B}=\ind{A}+\ind{B}$ if $A\cap B=\emptyset$, so $\nu$ is additive. To show countable additivity, let $\{A_{i}\}$ be a countable partition of $A$, let $B_{k}=\bigcup_{1}^{k}A_{i}$, and observe that
 \begin{align*}
-	\n{\mathbbm{1}_{A} -  \mathbbm{1}_{B_{k}} }_{p}=(\int_{X}(\mathbbm{1}_{A} -  \mathbbm{1}_{B_{k}})^{p}d\mu)^{1/p}=\mu(A-B_{k})^{1/p}\to 0, \qquad k\to \infty
+	\norm[p]{\ind{A} -  \ind{B_{k}} }=(\int_{X}(\ind{A} -  \ind{B_{k}})^{p} d\mu)^{1/p}=\mu(A-B_{k})^{1/p}\to 0, \qquad k\to \infty
 \end{align*}
-Here, the assumption that $p<\infty$ is used. Since $T$ is continuous we have $\nu(B_{k})\to \nu(A)$, so $\nu$ is a complex measure. It is clear that $\nu(A)=0$ whenever $\mu(A)=0$ since then $\n{\mathbbm{1}_{A}}_{p}=0$. Hence $\nu \ll \mu$ and the Radon-Nikodym theorem ensures the existence of a function $g\in L^{1}(\mu)$  such that for every $A\in \m{A}$
+Here, the assumption that $p<\infty$ is used. Since $T$ is continuous we have $\nu(B_{k})\to \nu(A)$, so $\nu$ is a complex measure. It is clear that $\nu(A)=0$ whenever $\mu(A)=0$ since then $\norm[p]{\ind{A}}=0$. Hence $\nu \ll \mu$ and the Radon-Nikodym theorem ensures the existence of a function $g\in L^{1}(\mu)$  such that for every $A\in \m{A}$
 \begin{align}
-	T(\mathbbm{1}_{A})=\int_{A}gd\mu=\int_{X}\mathbbm{1}_{A}gd\mu. \label{eq: kfa}
+	T(\ind{A})=\int_{A}gd\mu=\int_{X}\ind{A}gd\mu. \label{eq: kfa}
 \end{align}
 By linearity of $T$ it follows that 
 \begin{align}
 	Tf=\int_{X}fgd\mu \label{eq: T works for all f}
 \end{align}
-for every simple measurable function $f$, and so also for every $f\in L^{\infty}(\mu)$ since every such function $f$ is the uniform limit of simple functions $f_{i}$. Note that the uniform convergence of $f_{i}$ to $f$ implies $\n{f_{i}-f}_{p}\to 0$ hence $Tf_{i}\to Tf$ as $i\to \infty$.
+for every simple measurable function $f$, and so also for every $f\in L^{\infty}(\mu)$ since every such function $f$ is the uniform limit of simple functions $f_{i}$. Note that the uniform convergence of $f_{i}$ to $f$ implies $\norm[p]{f_{i}-f}\to 0$ hence $Tf_{i}\to Tf$ as $i\to \infty$.
 
 To conclude that $g\in L^{q}(\mu)$ and that \eqref{eq: equality of norms} holds, it is best to split the argument into two cases.
 
 1: If $p=1$, \eqref{eq: kfa} shows that
 \begin{align*}
-	\left| \int_{A}gd\mu\right| \le \n{T}\cdot \n{\mathbbm{1}_{A}}_{1}=\n{T}\cdot\mu(A)
+	\left| \int_{A}gd\mu\right| \le \norm{T}\cdot \norm[1]{\ind{A}}=\norm{T}\cdot\mu(A)
 \end{align*}
-for every $A\in \m{A}$. By \cref{thm: average lies in S} $|g(x)|\le \n{T}$ $\mu$-almost everywhere, hence $\n{g}_{\infty}\le \n{T}$.
+for every $A\in \m{A}$. By \cref{thm: average lies in S} $|g(x)|\le \norm{T}$ $\mu$-almost everywhere, hence $\norm[\infty]{g}\le \norm{T}$.
 
-2: If $1<p<\infty$ there is a measurable function $x\mapsto \alpha(x)$, such that $|\alpha|=1$ and $\alpha g=|g|$. Let $A_{n}:=\{|g(x)|\le n\}$ and define $f:=\mathbbm{1}_{A_{n}}|g|^{q-1}\alpha$. Then $|f|^{p}=|g|^{q}$ on $A_{n}$, $f\in L^{\infty}(\mu)$ and \eqref{eq: T works for all f} gives us that
+2: If $1<p<\infty$ there is a measurable function $x\mapsto \alpha(x)$, such that $|\alpha|=1$ and $\alpha g=|g|$. Let $A_{n}:=\{|g(x)|\le n\}$ and define $f:=\ind{A_{n}}|g|^{q-1}\alpha$. Then $|f|^{p}=|g|^{q}$ on $A_{n}$, $f\in L^{\infty}(\mu)$ and \eqref{eq: T works for all f} gives us that
 \begin{align*}
-	\int_{A_{n}}|g|^{q}d\mu=\int_{X}fgd\mu=Tf\le \n{T}\left[ \int_{A_{n}}|g|^{q}d\mu \right]^{1/p},
+	\int_{A_{n}}|g|^{q}d\mu=\int_{X}fgd\mu=Tf\le \norm{T}\left[ \int_{A_{n}}|g|^{q}d\mu \right]^{1/p},
 \end{align*}
 hence
 \begin{align*}
-	\int_{X}\mathbbm{1}_{A_{n}}|g|^{q}d\mu \le \n{T}^{q}, \qquad n=1,2, \dots
+	\int_{X}\ind{A_{n}}|g|^{q}d\mu \le \norm{T}^{q}, \qquad n=1,2, \dots
 \end{align*}
-We now apply the monotone convergence theorem to this and obtain $\n{g}_{q}\le \n{T}$ as wanted. So \eqref{eq: equality of norms} holds and $g\in L^{q}(\mu)$.
+We now apply the monotone convergence theorem to this and obtain $\norm[q]{g}\le \norm{T}$ as wanted. So \eqref{eq: equality of norms} holds and $g\in L^{q}(\mu)$.
 
 It follows that both sides of \eqref{eq: T works for all f} are continuous functions on $L^{p}(\mu)$, they coincide on the dense subset $L^{\infty}(\mu)$ of $L^{p}(\mu)$ so they coincide on all of $L^{p}(\mu)$ which completes the proof for the case when $\mu(X)<\infty$.
 
@@ -664,16 +665,16 @@ Hence
 \begin{align*}
 	S(F)=T(w^{1/p}F)
 \end{align*}
-defines a bounded linear functional $S$ on $L^{p}(\tilde{\mu})$ with $\n{S}=\n{T}$.
+defines a bounded linear functional $S$ on $L^{p}(\tilde{\mu})$ with $\norm{S}=\norm{T}$.
 The first part of this proof shows now that there exists a function $G\in L^{q}(\tilde{\mu})$ satisfying
 \begin{align*}
 	S(F)=\int_{X}FGd\tilde{\mu}, \qquad F\in L^{p}(\tilde{\mu})
 \end{align*}
 Letting $g=w^{1/q}G$ (or if $p=1$, $g=G$), we see that
 \begin{align*}
-	\int_{X}|g|^{q}d\mu=\int_{X}|G|d\tilde{\mu}=\n{S}^{q}=\n{T}^{q}
+	\int_{X}|g|^{q}d\mu=\int_{X}|G|d\tilde{\mu}=\norm{S}^{q}=\norm{T}^{q}
 \end{align*} 
-if $p>1$, whereas $\n{g}_{\infty}=\n{G}_{\infty}=\n{S}=\n{T}$ if $p=1$. Thus \eqref{eq: equality of norms} holds, and since $Gd\tilde{\mu}=w^{1/p}gd\mu$, we at last see
+if $p>1$, whereas $\norm[\infty]{g}=\norm[\infty]{G}=\norm{S}=\norm{T}$ if $p=1$. Thus \eqref{eq: equality of norms} holds, and since $Gd\tilde{\mu}=w^{1/p}gd\mu$, we at last see
 \begin{align*}
 	T(f)=S(w^{-1/p}f)=\int_{X}w^{-1/p}fGd\tilde{\mu}=\int_{X}fgd\mu
 \end{align*}
@@ -694,9 +695,9 @@ If $\mu$ is a complex Morel measure, \cref{thm: polar representation} ensures th
 \begin{align*}
 	\int fd\mu=\int fhd|\mu|.
 \end{align*}
-and we get $\int \mathbbm{1}_{A}d\mu=\mu(A)$. Thus
+and we get $\int \ind[A] d\mu=\mu(A)$. Thus
 \begin{align*}
-	\int_{X}\mathbbm{1}_{A}d(\mu+\nu)=(\mu+\nu)(A)=\mu(A)+\nu(A)=\int_{X}\mathbbm{1}_{A}d\mu+\int_{X}\mathbbm{1}_{A}d\nu
+	\int_{X}\ind{A} d(\mu+\nu)=(\mu+\nu)(A)=\mu(A)+\nu(A)=\int_{X}\ind{A}d\mu+\int_{X} \ind{A} d\nu
 \end{align*}
 when $\mu$ and $\nu$ are complex measures on $\m{A}$ and $A\in \m{A}$. This leads to the addition formula
 \begin{align*}
@@ -719,7 +720,7 @@ Let $X$ be a locally compact Hausdorff space. For any bounded linear functional 
 \end{align}
 for every $f\in C_{0}(X)$. Furthermore
 \begin{align}
-	\n{T}=|\mu|(X) \label{eq: jadfhsadf}
+	\norm{T}=|\mu|(X) \label{eq: jadfhsadf}
 \end{align}
 \end{theorem}
 \begin{proof}
@@ -730,19 +731,19 @@ To show uniqueness, assume $\nu, \lambda$ are regular complex Borel measures on 
 \end{align*}
 and since $C_{c}(X)$ is dense in $L^{1}(|\mu|)$ (see Theorem 3.14 in \cite{Rudin87}), $\{f_{n}\}$ can be chosen so that the last expression tends to $0$ as $n\to \infty$. Thus $|\mu|(X)=0$, thus $\mu=0$, which settles the uniqueness.
 
-Now given a bounded linear functional $T$ on $C_{0}(X)$, we can without loss of generality assume that $\n{T}=1$. Our aim will be to construct a \textbf{positive} linear functional $S$ on $C_{c}(X)$ such that
+Now given a bounded linear functional $T$ on $C_{0}(X)$, we can without loss of generality assume that $\norm{T}=1$. Our aim will be to construct a \textbf{positive} linear functional $S$ on $C_{c}(X)$ such that
 \begin{align}
-	|Tf| \le S(|f|)\le \n{f}, \qquad f\in C_{c}(X), \label{eq: ineq of lin funcs}
+	|Tf| \le S(|f|)\le \norm{f}, \qquad f\in C_{c}(X), \label{eq: ineq of lin funcs}
 \end{align}
-where $\n{f}$ denotes the supremum norm. Once we have this $S$, we can associate with is a positive Borel measure $\nu$ as in \cref{thm: Riesz-Markov-Kakutani representation theorem}. The conclusion of \cref{thm: Riesz-Markov-Kakutani representation theorem} is that $\nu$ is regular if $\nu(X)<\infty$. Since
+where $\norm{f}$ denotes the supremum norm. Once we have this $S$, we can associate with is a positive Borel measure $\nu$ as in \cref{thm: Riesz-Markov-Kakutani representation theorem}. The conclusion of \cref{thm: Riesz-Markov-Kakutani representation theorem} is that $\nu$ is regular if $\nu(X)<\infty$. Since
 \begin{align*}
 	\nu(X)=\sup\{ Sf: 0 \le f \le 1,  f\in C_{c}(X) \}
 \end{align*}
-and since $|Sf| \le 1$ if $\n{f} \le 1$, we see that actually $\nu(X)\le 1$.
+and since $|Sf| \le 1$ if $\norm{f} \le 1$, we see that actually $\nu(X)\le 1$.
 
 From \eqref{eq: ineq of lin funcs} we can further deduce that
 \begin{align*}
-	|Tf| \le S(|f|) = \int_{X} |f| d\nu = \n{f}_{1}, \qquad f\in C_{c}(X)
+	|Tf| \le S(|f|) = \int_{X} |f| d\nu = \norm[1]{f}, \qquad f\in C_{c}(X)
 \end{align*}
 where the last norm refers to the space $L^{1}(\nu)$. Thus $T$ is a linear functional on $C_{c}(X)$ of norm at most $1$ with respect to the $L^{1}(\nu)$-norm on $C_{c}(X)$. By Hahn-Banach there is a norm-preserving extension of $T$ to a linear functional on $L^{1}(\nu)$ and therefore \cref{thm: p dual of q} (the case $p=1$) gives a Borel measurable function $g\in L^{\infty}(\nu)$ with $|g| \le 1$ such that
 \begin{align}
@@ -750,13 +751,13 @@ where the last norm refers to the space $L^{1}(\nu)$. Thus $T$ is a linear funct
 \end{align}
 Each side of \eqref{eq: idno} is a continuous functional on $C_{0}(X)$ and $C_{c}(X)$ is dense in $C_{0}(X)$, hence \eqref{eq: idno} holds for all $f\in C_{0}(X)$ and so \eqref{eq: rep of lin func} holds with $d\mu=g d\nu$.
 
-Since $\n{T}=1$, \eqref{eq: idno} shows that
+Since $\norm{T}=1$, \eqref{eq: idno} shows that
 \begin{align*}
-	\int_{X} |g| d\nu \ge \sup\{ |Tf| : f\in C_{0}(X), \n{f} \le 1 \} = 1.
+	\int_{X} |g| d\nu \ge \sup\{ |Tf| : f\in C_{0}(X), \norm{f} \le 1 \} = 1.
 \end{align*}
 But since $\nu(X) \le 1$ and $|g| \le 1$ this forces $\nu(X)=1$ and $|g|=1$ $\nu$-almost everywhere. Thus $d|\mu| = |g| d\nu = d\nu$, by \cref{thm: later proof} and
 \begin{align*}
-	|\mu| (X) = \nu(X) = 1 = \n{T}
+	|\mu| (X) = \nu(X) = 1 = \norm{T}
 \end{align*}
 which proves \eqref{eq: jadfhsadf}.
 

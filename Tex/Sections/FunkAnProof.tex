@@ -25,9 +25,9 @@ Since $W$ is a closed subspace of the unit-ball in $L^{\infty}(\mu')$, it is com
 We now prove that $T(W)=\mu(\m{A})$, which shows that $\mu(\m{A})$ is closed and convex. First some more setup:
 
 Let $(\alpha_{1}, \dots, \alpha_{n})\in T(W)$ and define $W_{0}=T^{-1}(\{\alpha_{1}, \dots, \alpha_{n}\})$ (the pre-image). 
-Observe that for a measurable set $A\in \m{A}$, if we take the indicator function of $A$, then the map $T$ and the measure coincide, i.e. $T(\mathbbm{1}_{A})=\mu(A)$. Hence what we want to show is that $W_{0}$ contains an indicator function, since then every element in the image $T(W)$ is the image of some indicator function i.e. is the measure of some measurable set, which will conclude the proof. 
+Observe that for a measurable set $A\in \m{A}$, if we take the indicator function of $A$, then the map $T$ and the measure coincide, i.e. $T(\ind{A})=\mu(A)$. Hence what we want to show is that $W_{0}$ contains an indicator function, since then every element in the image $T(W)$ is the image of some indicator function i.e. is the measure of some measurable set, which will conclude the proof. 
 
-Now, since $W_{0}$ is a closed subset of $W$ it is $w^{*}$-compact and since $T$ is affine, $W_{0}$ is convex. Hence by the Krein-Milman theorem it has extreme points. We will show that if $g\in \Ext(W_{0})$ then $g=\mathbbm{1}_{U}$ for some measurable $U\in \m{A}$.
+Now, since $W_{0}$ is a closed subset of $W$ it is $w^{*}$-compact and since $T$ is affine, $W_{0}$ is convex. Hence by the Krein-Milman theorem it has extreme points. We will show that if $g\in \Ext(W_{0})$ then $g=\ind{U}$ for some measurable $U\in \m{A}$.
 
 So to show that the range is closed and convex we will use induction on $n$. For $n=1$ let $g\in \Ext(W_{0})$ and assume for contradiction that there is an $1 \ge \varepsilon > 0$ and a set $Z\in \m{A}$ with $\mu_{1}(Z)>0$ such that $\varepsilon \le g \le 1-\varepsilon$ on $Z$. Since $\mu_{1}$ is non-atomic, there is an $A\subseteq Z$, $A\in \m{A}$ such that $\mu_{1}(A)>0$ and $\mu_{1}(Z\setminus A)>0$. 
 
@@ -37,7 +37,7 @@ Pick $s,t\in \R$ not both zero, such that $|s|,|t| \le \varepsilon$ and
 \end{align*}
 which is possible since $\mu_{1}(A)$ and $\mu_{1}(Z\setminus A)$ are constants. Let
 \begin{align*}
-	h=s\mathbbm{1}_{A} - t\mathbbm{1}_{Z\setminus A}.
+	h=s\ind{A} - t\ind{Z\setminus A}.
 \end{align*}
 then since $A$ and $Z\setminus A$ are disjoint, and $|s|,|t|\le \varepsilon < 1$, we see that
 \begin{align*}
@@ -47,7 +47,7 @@ hence $\int_{X} h d\mu_{1}=0$. Since $|h|\le \varepsilon$, we have $|h|\le g \le
 \begin{align*}
 	\alpha(g+h)+ (1-\alpha)(g-h)=g
 \end{align*}
-this contradicts the assumption that $g\in \Ext(W_{0})$. Hence the exists a measurable $U\in \m{A}$ such that $g=\mathbbm{1}_{U}$. This means, that for $n=1$, $W_{0}$ contains an indicator function, thus $\mu(\m{A})=T(W)$ so $\mu(\m{A})$ is convex and closed as wanted. \\
+this contradicts the assumption that $g\in \Ext(W_{0})$. Hence the exists a measurable $U\in \m{A}$ such that $g=\ind{U}$. This means, that for $n=1$, $W_{0}$ contains an indicator function, thus $\mu(\m{A})=T(W)$ so $\mu(\m{A})$ is convex and closed as wanted. \\
 
 If $n > 1$ assume that $\mu_{1}, \dots, \mu_{n-1}$ have convex range. Again let $g\in \Ext(W_{0})$ and assume for contradiction that there is an $\frac{1}{2} \ge \varepsilon > 0$ and a set $Z\in \m{A}$ with $\mu_{n}(Z)>0$ such that $\varepsilon \le g \le 1-\varepsilon$ on $Z$. Since $\mu_{n}$ is non-atomic by assumption, there is an $A\subseteq Z$, $A\in \m{A}$ such that $\mu_{n}(A)>0$ and $\mu_{n}(Z\setminus A)>0$.
 
@@ -62,7 +62,7 @@ Pick $s,t\in \R$ not both $0$ such that $|s|,|t|\le \varepsilon$ and
 \end{align*}
 Let
 \begin{align*}
-	h=s(2\mathbbm{1}_{B}-\mathbbm{1}_{A}) + t(\mathbbm{1}_{Z\setminus A} - 2\mathbbm{1}_{C}).
+	h=s(2\ind{B}-\ind{A}) + t(\ind{Z\setminus A} - 2\ind{C}).
 \end{align*}
 then by the same calculations as above, we have that $\int_{X} h d\mu_{i}=0$ for $i=1, \dots, n$. Since $|h|\le \varepsilon$, we have $|h|\le g \le 1-|h|$ on $X$, hence $g\pm h \in W_{0}$, but since $h\not\equiv 0$ this contradicts the assumption that $g\in \Ext(W_{0})$. This means, that for $n > 1$, $W_{0}$ contains an indicator function, thus $\mu(\m{A})=T(W)$ so $\mu(\m{A})$ is convex and closed as wanted.
 

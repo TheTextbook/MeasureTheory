@@ -19,7 +19,7 @@ and thus $\mu$ is countably additive if and only if all the $\mu_{i}$'s are so.
 
 We equip $\R^{n}$ with the 1-norm, and define the \textbf{absolute value} of $\mu$ as
 \begin{align*}
-	| \mu | (A) = \sup \left\{ \sum_{i=1}^{\infty} \n{\mu(A_{i})}_{1} \middle| \{ A_{i} \}_{i\in \N} \text{ is a partition of } A \right\}.
+	| \mu | (A) = \sup \left\{ \sum_{i=1}^{\infty} \norm[1]{\mu(A_{i})} \middle| \{ A_{i} \}_{i\in \N} \text{ is a partition of } A \right\}.
 \end{align*}
 Equipping $\R^{n}$ with the 1-norm has the advantage that
 \begin{align}
@@ -27,7 +27,7 @@ Equipping $\R^{n}$ with the 1-norm has the advantage that
 \end{align}
 where $|\mu_{i}|$ are the usual absolute values taken in $\R$. To see this, we note that
 \begin{align*}
-	\sum_{i=1}^{\infty} \n{\mu(A_{i})}_{1} = \sum_{j=1}^{\infty} \sum_{i=1}^{\infty} | \mu_{j}(A_{i}) | \le \sum_{j=1}^{\infty} |\mu_{j}|(A)
+	\sum_{i=1}^{\infty} \norm[1]{\mu(A_{i})} = \sum_{j=1}^{\infty} \sum_{i=1}^{\infty} | \mu_{j}(A_{i}) | \le \sum_{j=1}^{\infty} |\mu_{j}|(A)
 \end{align*}
 hence $|\mu|(A) \le \sum_{j=1}^{\infty} |\mu_{j}|(A)$ since $\{A_{i}\}_{i\in \N}$ was an arbitrary partition.
 
@@ -44,7 +44,7 @@ from which we see that
 \begin{align*}
 	\sum_{j=1}^{\infty} |\mu_{j} | (A) &\le \varepsilon +  \sum_{j=1}^{n} \sum_{i=1}^{\infty} | \mu_{j}(A_{i}^{j})| \\
 	&\le \varepsilon + \sum_{j=1}^{n} \sum_{\alpha} | \mu_{j}(B_{\alpha})| \\
-	&= \varepsilon + \sum_{\alpha} \n{\mu (B_{\alpha})}_{1}   \le \varepsilon + |\mu|(A) \\
+	&= \varepsilon + \sum_{\alpha} \norm[1]{\mu (B_{\alpha})}   \le \varepsilon + |\mu|(A) \\
 \end{align*}
 since $B_{\alpha}$ is a particular partition, and $|\mu|$ is the supremum of the sum over all such partitions. Now since $\varepsilon>0$ was arbitrary, \eqref{eq: one norm} follows.
 
@@ -216,21 +216,21 @@ Define
 \end{align*}
 i.e. $x\in A_{*}$ if $x\in A_{i}$ eventually. Define
 \begin{align*}
-	\varphi(x)=\left( \sum_{i=1}^{\infty} \frac{1}{2^{i}}\mathbbm{1}_{A_{i}} \right) \cdot \mathbbm{1}_{A\setminus A_{*}}(x)
+	\varphi(x)=\left( \sum_{i=1}^{\infty} \frac{1}{2^{i}}\ind{A_{i}} \right) \cdot \ind{A\setminus A_{*}}(x)
 \end{align*}
 This function is obviously well-defined and measurable, and $\varphi(X) \subseteq [0,1)$.
 We will prove that $\varphi\in K(\mu, A)$. For a dyadic number $\frac{k}{2^{n}}$, $k\in \{1, \dots, 2^{n} \}$ we see that
 \begin{align*}
-	\left\{ \varphi(x) < \frac{k}{2^{n}} \right\} = A_{*} \cup \left\{ \sum_{i=1}^{n} \frac{1}{2^{i}}\mathbbm{1}_{A_{i}}(x) < \frac{k}{2^{n}} \right\}
+	\left\{ \varphi(x) < \frac{k}{2^{n}} \right\} = A_{*} \cup \left\{ \sum_{i=1}^{n} \frac{1}{2^{i}}\ind{A_{i}}(x) < \frac{k}{2^{n}} \right\}
 \end{align*}
 The direction ``$\subseteq$'' is clear.
 For the other inclusion, if an $x$ is in the rightmost set, but $x\not\in A_{*}$ we must have
 \begin{align*}
-	\sum_{i=1}^{n}\frac{1}{2^{i}}\mathbbm{1}_{A_{i}}(x)\le \frac{k-1}{2^{n}}<\frac{k}{2^{n}}
+	\sum_{i=1}^{n}\frac{1}{2^{i}}\ind{A_{i}}(x)\le \frac{k-1}{2^{n}}<\frac{k}{2^{n}}
 \end{align*}
 Since the inequality is strict in the rightmost set, and the sum must have the form $\frac{l}{2^{n}}$. Since $x\not\in A_{*}$ the following inequality is strict
 \begin{align*}
-	\sum_{i=n+1}^{\infty} \frac{1}{2^{i}}\mathbbm{1}_{A_{i}}(x) < \frac{1}{2^{n}},
+	\sum_{i=n+1}^{\infty} \frac{1}{2^{i}}\ind{A_{i}}(x) < \frac{1}{2^{n}},
 \end{align*}
 hence for such an $x$, $\varphi(x) < \frac{k-1}{2^{n}}+\frac{1}{2^{n}}=\frac{k}{2^{n}}$.
 
@@ -240,11 +240,11 @@ Now define
 \end{align*}
 which is just all the binary numbers, which when translated to base 10 is less than $k$. So $B^{*}$ has exactly $k$ elements. Using techniques from earlier, we see that
 \begin{align*}
-	\left\{ \sum_{i=1}^{n} \frac{1}{2^{i}} \mathbbm{1}_{A_{i}} < \frac{k}{2^{n}} \right\} = \left\{ \sum_{i=1}^{n} 2^{n-i} \mathbbm{1}_{A_{i}} < k \right\} = \bigcup_{b\in B^{*}} A[b]
+	\left\{ \sum_{i=1}^{n} \frac{1}{2^{i}} \ind{A_{i}} < \frac{k}{2^{n}} \right\} = \left\{ \sum_{i=1}^{n} 2^{n-i} \ind{A_{i}} < k \right\} = \bigcup_{b\in B^{*}} A[b]
 \end{align*}
 From \eqref{eq: repeated semi-convexity} above, it is clear that $A^{*}$ has measure zero, and that
 \begin{align}
-	\mu\left( \left\{ \varphi < \frac{k}{2^{n}} \right\} \right) &= \mu\left( \left\{ \sum_{i=1}^{n} \frac{1}{2^{i}}\mathbbm{1}_{A_{i}} < \frac{k}{2^{n}} \right\} \right) = \mu\left( \bigcup_{b\in B^{*}} A[b] \right) \nonumber \\
+	\mu\left( \left\{ \varphi < \frac{k}{2^{n}} \right\} \right) &= \mu\left( \left\{ \sum_{i=1}^{n} \frac{1}{2^{i}}\ind{A_{i}} < \frac{k}{2^{n}} \right\} \right) = \mu\left( \bigcup_{b\in B^{*}} A[b] \right) \nonumber \\
 	&= \sum_{b\in B^{*}} \mu(A[b]) = \sum_{b\in B^{*}} \frac{1}{2^{n}} \mu(A) = \frac{k}{2^{n}}\mu(A). \label{eq: almost convex}
 \end{align}
 Now any $\alpha\in (0,1]$ is a limit of an increasing sequence, $\alpha_{i}$ of dyadic numbers, so since $\mu$ is countably additive and from the above calculations, we get
@@ -266,19 +266,19 @@ Let $\mu : \m{A} \to \R^{n}$ be a convex and non-negative vector measure, and le
 is continuous.
 \end{lemma}
 \begin{proof}
-Each component $\nu_{i}$ of $\nu$ satisfies $\nu_{i}\ll \nu \ll |\mu|$. From $n$ applications of theorem \cref{thm: why it is called absolutely continuous} we get (using that $\mu$ is non-negative, hence $|\mu|(B)=\n{\mu(B)}_{1}$), that
+Each component $\nu_{i}$ of $\nu$ satisfies $\nu_{i}\ll \nu \ll |\mu|$. From $n$ applications of theorem \cref{thm: why it is called absolutely continuous} we get (using that $\mu$ is non-negative, hence $|\mu|(B)=\norm[1]{\mu(B)}$), that
 \begin{align*}
-	\forall \varepsilon > 0, \exists \delta > 0 \forall B\in \m{A}: \n{\mu(B)}_{1} < \delta \Rightarrow \n{\nu(B)}_{1} < \varepsilon
+	\forall \varepsilon > 0, \exists \delta > 0 \forall B\in \m{A}: \norm[1]{\mu(B)} < \delta \Rightarrow \norm[1]{\nu(B)} < \varepsilon
 \end{align*}
-so for $\varepsilon > 0$ given, if $|\alpha_{1}-\alpha_{2}| < \frac{\delta}{\n{\mu(A)}_{1}}$ with $\delta$ from above and $\alpha_{2}\le \alpha_{1}$, we have
+so for $\varepsilon > 0$ given, if $|\alpha_{1}-\alpha_{2}| < \frac{\delta}{\norm[1]{\mu(A)}}$ with $\delta$ from above and $\alpha_{2}\le \alpha_{1}$, we have
 \begin{align*}
-	\n{\mu(\alpha_{2} \le \varphi < \alpha_{1} )}_{1} &= \n{ \mu(\varphi < \alpha_{1}) - \mu(\varphi < \alpha_{2}) }_{1} \\
-	& = \n{ \alpha_{1}\mu(A) - \alpha_{2}\mu(A) }_{1} < \delta
+	\norm[1]{\mu(\alpha_{2} \le \varphi < \alpha_{1} )} &= \norm[1]{ \mu(\varphi < \alpha_{1}) - \mu(\varphi < \alpha_{2}) } \\
+	& = \norm[1]{ \alpha_{1}\mu(A) - \alpha_{2}\mu(A) } < \delta
 \end{align*}
 With this
 \begin{align*}
-	\n{N(\alpha_{1})-N(\alpha_{2})}_{1} &= \n{ \nu(\varphi < \alpha_{1}) - \nu(\varphi< \alpha_{2}) }_{1} \\
-	&= \n{ \nu(\alpha_{2} \le \varphi < \alpha_{1}) }_{1} < \epsilon
+	\norm[1]{N(\alpha_{1})-N(\alpha_{2})} &= \norm[1]{ \nu(\varphi < \alpha_{1}) - \nu(\varphi< \alpha_{2}) } \\
+	&= \norm[1]{ \nu(\alpha_{2} \le \varphi < \alpha_{1}) } < \epsilon
 \end{align*}
 \end{proof}
 
