@@ -15,11 +15,17 @@ The Textbook is an open source project, which means you are free to help in any 
     - Logic
     - Linear Algebra
     - ...
-- Design
+- Design, including:
+    - Frontpage design
+    - General design
+    - Maintain preamble
 - Guide to collaborators
 - Writing
 - Quality control
 - Communication between collaborators
+- Unifying Notation?
+    - For instance, should the powerset be denoted the same in all textbooks, and if so, how should it be written.
+    - Make macros
 
 ### Minor tasks
 - Continuous Spell checking
