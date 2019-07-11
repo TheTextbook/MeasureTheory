@@ -1,0 +1,818 @@
+\section{Complex Measures}
+
+We can generalize finite (real and positive) measures with the following.
+
+\begin{definition}
+Let $(X, \m{A})$ be a measurable space. A complex measure is a set function $\mu: \m{A} \to \C$ such that for every partition $\{A_{i}\}_{i\in \N}$ of $A$
+\begin{align}
+	\mu(A) = \sum_{i=1}^{\infty}\mu(A_{i}) \label{eq: convergence of complex measure}
+\end{align}
+\end{definition}
+The convergence of the series in \eqref{eq: convergence of complex measure} is now required whereas for positive and real measures, the series could either converge or diverge to $\infty$ (possibly $-\infty$ for real measures). This in turn ensures that $\mu(\emptyset)=0$.
+For any partition $\sigma: \N \to \N$ the union of the partition is unchanged so \eqref{eq: convergence of complex measure} implies
+\begin{align*}
+	\sum_{i=1}^{\infty}\mu(A_{i}) = \mu\left(\bigcup_{i=1}^{\infty}A_{i})\right) = \mu\left(\bigcup_{i=1}^{\infty}A_{\sigma(i)})\right) = \sum_{i=1}^{\infty}\mu(A_{\sigma(i)}).
+\end{align*}
+We express this by saying that the series in \eqref{eq: convergence of complex measure} is unconditionally convergent. It is well known that an absolutely convergent series is conditionally convergent, and we will later prove (in \cref{prop: unconditionally implies absolutely}) that in fact a series is unconditionally convergent if and only if it is absolutely convergent, so \eqref{eq: convergence of complex measure} is absolutely convergent.
+
+\begin{definition}
+For a complex measure $\mu: \m{A} \to \C$ we associate a new set function $|\mu|$ given by
+\begin{align*}
+	|\mu|(A) := \sup\left\{ \sum_{i=1}^{\infty} |\mu(A_{i}) | : \{A_{i}\}_{i\in \N} \text{ partition of } A \right\}, A \in \m{A}
+\end{align*}
+The measure $|\mu|$ is called the \textbf{total variation} (measure) of $\mu$. The term total variation of $\mu$ is often used to denote the number $|\mu|(X)$.
+\end{definition}
+
+\begin{theorem}
+The total variation measure $|\mu|$ of a complex measure $\mu$ is a positive measure.
+\end{theorem}
+\begin{proof}
+Clearly $|\mu|(\emptyset)=0$ and $|\mu|(A) \le |\mu|(B)$ whenever $A\subseteq B$.
+
+Let $\{A_{i}\}_{i\in \N}$ be a partition of $A\in \m{A}$, $\varepsilon>0$ be given, and for each $i\in \N$ choose a partition $\{B_{ij}\}_{j \in \N}$ of $A_{i}$ such that
+\begin{align*}
+	|\mu|(A_{i}) - \frac{\varepsilon}{2^{i}} < \sum_{j=1}^{\infty} | \mu(B_{ij}) |.
+\end{align*}
+Then $\{B_{ij}\}_{i,j\in \N}$ is a partition of $A$, and we get
+\begin{align*}
+	\sum_{i=1}^{\infty} |\mu|(A_{i}) - \varepsilon \le \sum_{i=1}^{\infty}\sum_{j=1}^{\infty} | \mu(B_{ij}) | \le |\mu|(A),
+\end{align*}
+and since $\varepsilon$ was arbitrary, $\sum_{i=1}^{\infty} |\mu|(A_{i}) \le |\mu|(A)$.
+
+For the other inequality let $\{B_{i}\}_{i\in \N}$ be an arbitrary partition of $A$. For fixed $i$, $\{B_{i} \cap A_{j}\}_{j\in \N}$ is a partition of $B_{i}$, and for fixed $j$, $\{B_{i} \cap A_{j}\}_{i\in \N}$ is a partition of $A_{j}$. Hence
+\begin{align*}
+	\sum_{i=1}^{\infty}|\mu(B_{i})| &= \sum_{i=1}^{\infty} \left| \sum_{j=1}^{\infty} \mu(B_{i} \cap A_{j}) \right|\\
+	&\le \sum_{i=1}^{\infty} \sum_{j=1}^{\infty} | \mu(B_{i} \cap A_{j}) | \\
+	&= \sum_{j=1}^{\infty} \sum_{i=1}^{\infty} | \mu(B_{i} \cap A_{j}) |\\
+	&\le \sum_{j=1}^{\infty} |\mu(A_{j})|
+\end{align*}
+taking the supremum over all partitions $\{B_{i}\}_{i\in \N}$ of $A$ we get
+\begin{align*}
+	|\mu|(A) \le \sum_{j=1}^{\infty} |\mu(A_{j})|
+\end{align*}
+hence equality holds.
+\end{proof}
+
+%%%%%%%%%%%%%%%%   Pi-inequality  %%%%%%%%%%%%%%%%
+
+\begin{lemma} \label{lem: weird pi inequality}
+If $z_{1}, \dots, z_{N} \in \C$, then there is a subset $S$ of $\{1, \dots, N\}$ for which
+\begin{align}
+	\left| \sum_{k\in S} z_{k} \right| \ge \frac{1}{\pi} \sum_{k=1}^{\infty} |z_{k}|. \label{eq: weird pi inequality}
+\end{align}
+\end{lemma}
+\begin{proof}
+Write $z_{k}=|z_{k}|e^{i\alpha_{k}}$. For $-\pi \le \theta \le \pi$ let $S(\theta)$ be the set of all $k\in \{1, \dots, N\}$ for which $\cos(\alpha_{k} - \theta) > 0$. Then
+\begin{align*}
+	\left| \sum_{k\in S(\theta)} z_{k} \right| &= \left| e^{-i\theta} \sum_{k\in S(\theta)} z_{k} \right| \ge \mathfrak{R} \left( \sum_{k\in S(\theta)} e^{-i\theta} z_{k} \right) = \sum_{k\in S(\theta)} |z_{k}|\cos(\alpha_{k} - \theta) \\
+	&= \sum_{k=1}^{N} |z_{k}| \cos^{+}(\alpha_{k}- \theta).
+\end{align*}
+If $S(\theta)$ is empty, then the empty sum is 0 by definition.
+
+The function $\varphi(\theta):=\sum_{k=1}^{N} |z_{k}| \cos^{+}(\alpha_{k}- \theta)$ is continuous on $[-\pi, \pi]$, and attains its maximum at a point $\theta=\theta_{0}$. Let $S=S(\theta_{0})$. Then
+\begin{align*}
+	\left| \sum_{k\in S} z_{k} \right| \ge \max_{\theta\in [-\pi, \pi]} \varphi(\theta) \ge \frac{1}{2\pi} \int_{-\pi}^{\pi} \varphi(\theta)d\theta = \sum_{k=1}^{N} |z_{k}| \frac{1}{2\pi} \int_{-\pi}^{\pi} \cos^{+}(\alpha_{k}-\theta)d\theta,
+\end{align*}
+but
+\begin{align*}
+	\frac{1}{2\pi}\int_{-\pi}^{\pi} \cos^{+}(\alpha_{k}-\theta)d\theta = \frac{1}{2\pi}\int_{-\pi}^{\pi} \cos^{+}(\theta)d\theta=\frac{1}{2\pi}\int_{\frac{-\pi}{2}}^{\frac{\pi}{2}} \cos(\theta)d\theta = \frac{1}{2}
+\end{align*}
+so \eqref{eq: weird pi inequality} holds.
+\end{proof}
+
+We can now prove that an unconditionally convergent series is absolutely convergent. We prove an apparently stronger statement.
+
+\begin{proposition}\label{prop: unconditionally implies absolutely}
+Let $\{z_{i}\}_{i\in \N}$ be a sequence of complex numbers such that $\sum_{i=1}^{\infty}z_{\sigma(i)}$ is convergent for all permutations $\sigma:\N \to \N$ with sum $s_{\sigma}\in \C$. Then $\sum_{i=1}^{\infty}|z_{i}|<\infty$ and $s_{\sigma}$ is independent of $\sigma$.
+\end{proposition}
+\begin{proof}
+Assume that $\sum_{i=1}^{\infty}|z_{i}|=\infty$, we will then show that there exists a permutation, $\sigma$, such that $\sum_{i=1}^{\infty}|z_{\sigma(i)}|=\infty$, which is a contradiction with the assumption. For this, choose an $N_{1}\in \N$ such that
+\begin{align*}
+	\sum_{i=1}^{N_{1}}|z_{i}| > \pi.
+\end{align*}
+Using \Cref{lem: weird pi inequality} there exists a subset $S_{1}\subseteq \{1, \dots, N_{1}\}$ such that
+\begin{align*}
+	\left|\sum_{i\in S_{1}}z_{i}\right| \ge \sum_{i=1}^{N_{1}}|z_{i}| > 1.
+\end{align*}
+Since $\sum_{i=N_{1}+1}^{\infty}|z_{i}|=\infty$ we choose $N_{2}>N_{1}$ such that $\sum_{i=N_{1}+1}^{N_{2}}|z_{n}|>\pi$ and by \Cref{lem: weird pi inequality} there exists a subset $S_{2}\subseteq \{N_{1}+1, \dots, N_{2}\}$ such that
+\begin{align*}
+	\left|\sum_{i\in S_{2}} z_{i} \right| > 1.
+\end{align*}
+Repeating this construction, we get a sequence $S_{1}, S_{2}, \dots $ of pairwise disjoint and finite subsets of $\N$ such that
+\begin{align}
+	\left| \sum_{i\in S_{n}}z_{i}\right| > 1, \quad \text{for all } n. \label{eq: all greater than one}
+\end{align}
+If $\N\setminus \bigcup_{i=1}^{\infty}S_{i}=\{n_{1}, n_{2}, \dots \}$ with $n_{i}<n_{j}$ when $i<j$, we define a bijection $\sigma:\N \to \N$ by arranging $\N$ in the following way: $S_{1},n_{1}, S_{2},n_{2}, \dots$, with the elements in $S_{n}$ ordered in the usual fashion. If on the other hand $\N\setminus \bigcup_{i=1}^{\infty}S_{i}=\{n_{1}, n_{2}, \dots, n_{k} \}$ (i.e. finite) we arrange $\N$ by the following: $S_{1},n_{1}, \dots, S_{k},n_{k},S_{k+1},n_{k+1}, \dots$.
+
+Now $\sigma$ is a permutation for which $\sum_{i\in \N} z_{\sigma(i)}$ doesn't converge, because if it did converge, there would exist an $N\in \N$ such that
+\begin{align*}
+	\forall n\ge N, \; \forall p\in \N: \left| \sum_{i=n+1}^{n+p} z_{\sigma(i)} \right| \le \frac{1}{2},
+\end{align*}
+but this contradicts \eqref{eq: all greater than one}, and we are done.
+\end{proof}
+
+
+The following theorem shows that every complex measure is bounded. This property is often expressed by saying that $\mu$ is of bounded variation.
+
+\begin{theorem}\label{thm: total variation is finite}
+If $\mu$ is a complex measure on $X$, then $|\mu|(X)<\infty$.
+\end{theorem}
+\begin{proof}
+First suppose that some set $A\in \m{A}$ has $|\mu|(A)=\infty$. Put $t=\pi(1+|\mu(A)|)$. Since $|\mu|(A)>t$, there is a partition $\{A_{i}\}_{i\in \N}$ such that
+\begin{align*}
+	\sum_{i=1}^{N}|\mu(A_{i})| > t
+\end{align*}
+for some $N\in \N$. We now use \Cref{lem: weird pi inequality} with $z_{i}=\mu(A_{i})$ to obtain a subset $S$ of $\{1, \dots, N\}$, such that with $B=\bigcup_{k\in S}A_{k}$, we get
+\begin{align*}
+	|\mu(B)| = \left| \sum_{k\in S} \mu(A_{k}) \right| \ge \frac{1}{\pi} \sum_{i=1}^{N}|\mu(A_{i})| > \frac{t}{\pi} > 1.
+\end{align*}
+With $C=A\setminus B$ it follows that
+\begin{align*}
+	|\mu(C)|=|\mu(A)-\mu(B)| \ge |\mu(B)| - |\mu(A)| > \frac{t}{\pi} - |\mu(A)| = 1
+\end{align*}
+Thus $A$ can be split up into two disjoint sets $B$ and $C$ with $|\mu(B)|, |\mu(C)|>1$. Since $|\mu|$ is a measure, one of $|\mu|(B)$ or $|\mu|(C)$ must be $\infty$.
+
+So assume for contradiction that $|\mu|(X)=\infty$. We then split $X$ into two disjoint sets $B_{1}$, $C_{1}$ as above with $|\mu|(B_{1})>1$, $|\mu|(C_{1})=\infty$, and split $C_{1}$ into two disjoint sets $B_{2}$, $C_{2}$ as above with $|\mu|(B_{2})>1$, $|\mu|(C_{2})=\infty$. We continue this way and get a countable infinite disjoint family $\{B_{i}\}_{i\in \N}$ with $|\mu|(B_{i})>1$ for each $i\in \N$. Since $\mu$ is countably additive
+\begin{align*}
+	\mu\left( \bigcup_{i=1}^{\infty} B_{i} \right) = \sum_{i=1}^{\infty} \mu(B_{i}).
+\end{align*}
+But this series cannot converge, since $\mu(B_{i})$ does not go towards $0$ as $i\to \infty$ so this contradiction shows that $|\mu|(X)<\infty$.
+\end{proof}
+
+\begin{theorem}
+Let $\mu$ be a complex measure. Then $|\mu|$ is the smallest positive measure $\nu$ satisfying
+\begin{align*}
+	|\mu(A)| \le \nu(A), \quad \forall A\in \m{A}.
+\end{align*}
+\end{theorem}
+\begin{proof}
+Clearly $\mu(A)| \le |\mu|(A)$ for all $A\in \m{A}$ since $A=A\cup\emptyset \cup \emptyset \cup \dots$ is a partition of $A$.
+
+Let $\nu$ be a positive measure on $(X, \m{A})$ satisfying
+\begin{align}
+	|\mu(A)|\le \nu(A), \quad \forall A\in \m{A}. \label{eq: piajsf}
+\end{align}
+The claim is that $|\mu|(A)\le \nu(A)$ for all $A\in \m{A}$, and it is enough to prove that
+\begin{align*}
+	\sum_{i=1}^{\infty}|\mu(A_{i})| \le \nu(A)
+\end{align*}
+for every partition $\{A_{i}\}_{i\in \N}$ of $A$. But this is obvious since the left hand side of \eqref{eq: piajsf} is majorized by
+\begin{align*}
+	\sum_{i=1}^{\infty}\nu(A_{i})=\nu(A).
+\end{align*}
+\end{proof}
+
+\begin{corollary}\label{cor: stupid corollary}
+Let $\mu$ be a complex measure and $A\in \m{A}$. Then
+\begin{align*}
+	|\mu|(A)&=\sup\left\{ \sum_{i=1}^{\infty} |\mu(A_{i}) | n\in \N, \{A_{1}, \dots, A_{n}\} \text{ partition of } A \right\} \\
+	&=\sup\left\{ \sum_{i=1}^{\infty} |\mu(A_{i}) | n\in \N A_{1}, \dots, A_{n} \text{ pairwise disjoint subsets of } A \right\}
+\end{align*}
+\end{corollary}
+\begin{proof}
+The idea is, for some countable partition, to construct a finite partition, and a finite family of disjoint sets, which still satisfy the property.
+
+For $\varepsilon>0$ there exists a countable partition $\{A_{i}\}_{i\in I}$ of $A$ such that
+\begin{align*}
+	\sum_{i=1}^{\infty} |\mu(A_{i})| > |\mu|(A)-\frac{\varepsilon}{2}.
+\end{align*}
+The series on the left is convergent since it is by definition less than $|\mu|(A)$ which we proved was finite. So there exists an $N\in \N$ such that
+\begin{align*}
+	\sum_{N+1}^{\infty} |\mu(A_{i})| < \frac{\varepsilon}{2}.
+\end{align*}
+Then $A_{1}, \dots, A_{N}$ are pairwise disjoint subsets of $A$ which satisfy
+\begin{align*}
+	\sum_{i=1}^{N}|\mu(A_{i})| = \sum_{i=1}^{\infty}|\mu(A_{i})| - \sum_{i=N+1}^{\infty}|\mu(A_{i})| > |\mu(A_{i})|-\frac{\varepsilon}{2}-\frac{\varepsilon}{2},
+\end{align*}
+and with $\tilde{A}=\bigcup_{i=N+1}^{\infty}A_{i}$ we see that $\{A_{1}, \dots, A_{N}, \tilde{A}\}$ is a finite partition of $A$ with
+\begin{align*}
+	\sum_{i=1}^{N}|\mu(A_{i})| + |\mu(\tilde{A})| > |\mu|(A)-\varepsilon.
+\end{align*}
+\end{proof}
+
+%%%%%%%%%%%%%%%%   Discussion of the complex measures as a banach space  %%%%%%%%%%%%%%%%
+
+We denote the set of complex measures on $(X, \m{A})$ by $M(X, \m{A})$.
+For two measures $\mu, \nu \in M(X, \m{A})$ we define
+\begin{align*}
+	(\mu + \nu)(A)&:=\mu(A)+\nu(A) \\
+	(z\mu)(A)&:=z\mu(A)
+\end{align*}
+for all $A\in \m{A}$, $z\in \C$. With these operations, $M(X, \m{A})$ is a vector space over $\C$. If we furthermore define
+\begin{align*}
+	\Vert \mu \Vert := |\mu|(X)
+\end{align*}
+then $\m{M}(X, \m{A})$ becomes a normed linear space.
+
+A complex measure is a bounded function on $(X, \m{A})$, so $M(X, \m{A})$ can be seen as a subspace of $B(\m{A}, \C)$, the space of bounded functions on $\m{A}$, which is a Banach space with the uniform norm. We want to prove that $M(X, \m{A})$ with the total variation norm is a Banach space as a subspace of $B(\m{A}, \C)$ equipped with the uniform norm. So first we have to prove that the uniform norm and the total variation norm are equivalent
+
+\begin{lemma}
+For $\mu \in M(X, \m{A})$
+\begin{align*}
+	\sup_{A\in \m{A}} |\mu(A)| \le \vert \mu \Vert \le \pi \sup_{A\in \m{A}} |\mu(A)|
+\end{align*}
+\end{lemma}
+\begin{proof}
+The first inequality follows from $|\mu(A)| \le |\mu|(A)\le |\mu|(X) \le \n{\mu}$.
+
+Let $A_{1},\dots,A_{n}\in \m{A}$ be pairwise disjoint. By \Cref{lem: weird pi inequality} there exists a subset $S\subseteq \{1,\dots, n\}$ such that
+\begin{align*}
+	\sum_{i=1}^{n}|\mu(A_{i}| \le \pi \left| \sum_{i\in S}|\mu(A_{i}) \right| = \pi \left| \mu(\bigcup_{i\in S} A_{i}) \right| \le \pi \sup_{A\in \m{A}} |\mu(A)|
+\end{align*}
+And \cref{cor: stupid corollary} tells us that
+\begin{align*}
+	|\mu|(X)\le \pi \sup_{A\in \m{A}} |\mu(A)|
+\end{align*}
+completing the proof.
+\end{proof}
+
+%%%%%%%%%%%%%%%%   complex measures form a banach space  %%%%%%%%%%%%%%%%
+
+\begin{theorem}
+$M(X, \m{A})$ is a Banach space under the total variation norm.
+\end{theorem}
+\begin{proof}
+Let $\{\mu_{n}\}_{n\in \N}$ be a sequence of complex measures converging uniformly (since we are in the uniform norm-topology) to a function $\mu\in B(\m{A},\C)$. We will show that in fact $\mu\in M(X, \m{A})$.
+
+If $A_{i}, \dots, A_{m}$ are pairwise disjoint sets from $\m{A}$, then
+\begin{align*}
+	\mu\left( \bigcup_{i=1}^{m} A_{i} \right)=\lim_{n\to \infty}\mu_{n}\left( \bigcup_{i=1}^{m} A_{i} \right)=\lim_{n\to \infty} \left( \sum_{i=1}^{m} \mu_{n}(A_{i}) \right)=\sum_{i=1}^{m}\mu(A_{i}),
+\end{align*}
+hence $\mu$ is finitely additive. To show that $\mu$ is countably additive, let $\{A_{i}\}_{i\in \N}$ be a sequence of pairwise disjoint sets from $\m{A}$. Given $\varepsilon>0$ there exists $n_{0}\in \N$ such that
+\begin{align*}
+	|\mu(B) - \mu_{n_{0}}(B)| \le \frac{\varepsilon}{2} \quad \text{for all } B\in \m{A}.
+\end{align*}
+Since $\mu$ was finitely additive, we obtain
+\begin{align*}
+	&\left| \mu\left( \bigcup_{i=1}^{\infty}A_{i} \right) - \sum_{i=1}^{m}\mu(A_{i}) \right| = \left|\mu\left( \bigcup_{i=m+1}^{\infty}A_{i} \right) \right| \\
+	&\le \left| \mu\left( \bigcup_{i=m+1}^{\infty} A_{i} \right) - \mu_{n_{0}}\left( \bigcup_{i=m+1}^{\infty} A_{i} \right) \right| + \left| \mu_{n_{0}}\left( \bigcup_{i=m+1}^{\infty} A_{i} \right) \right| \\
+	&\le \frac{\varepsilon}{2} + |\mu_{n_{0}}|\left( \bigcup_{i=m+1}^{\infty} A_{i} \right)
+\end{align*}
+Since $|\mu_{n_{0}}|$ is a finite positive measure, the last term in the above tends to zero as $m\to \infty$. This shows that
+\begin{align*}
+	\left| \mu\left( \bigcup_{i=1}^{\infty}A_{i} \right) - \sum_{i=1}^{m}\mu(A_{i}) \right| \le \varepsilon
+\end{align*}
+for $m$ large enough such that $|\mu_{n_{0}}|\left( \bigcup_{i=m+1}^{\infty} A_{i} \right)\le \frac{\varepsilon}{2}$. This shows that $\mu$ is a complex measure.
+\end{proof}
+
+
+\begin{example}\label{ex: example to prove}
+(a) Let $\{z_{n}\}_{n\in \N}\subseteq \C$ be such that $\sum_{1}^{\infty}|z_{n}|<\infty$. We then define a complex measure on the $\sigma$-algebra of the power set of $\N$ by setting $\mu(\{n\}):=z_{n}$, $n\in \N$, such that
+\begin{align*}
+	\mu(A)=\sum_{n\in A}z_{n}, \quad A\subseteq \N.
+\end{align*}
+Clearly
+\begin{align*}
+	|\mu|(A)=\sum_{n\in A}|z_{n}|.
+\end{align*}
+
+(b)
+It is easy to see, that if $\mu_{1}, \mu_{2}$ are positive measures where one of them is finite, then $\mu_{1}-\mu_{2}$ defines a real measure. Furthermore, if $\lambda_{1}, \lambda_{2}$ are finite real measures, it is also quite easy to see that $\lambda_{1}+i\lambda_{2}$ defines a complex measure. So, let $(X, \m{A}, \mu)$ be a measure space with a positive measure $\mu$ and let $f:X\to \C$ be a $\mu$-integrable function. Then
+\begin{align*}
+	\sigma(A):=\int_{A}fd\mu, \quad A\in A
+\end{align*}
+is a complex measure since
+\begin{align*}
+	\int_{A}fd\mu=\int_{A}\mathfrak{R}(f)^{+}d\mu-\int_{A}\mathfrak{R}(f)^{-}d\mu+i\int_{A}\mathfrak{I}(f)^{+}d\mu-i\int_{A}\mathfrak{I}(f)^{-}d\mu
+\end{align*}
+and each of the four integrals define a finite positive measure.
+we will later prove (\cref{thm: later proof}) that
+\begin{align*}
+	|\sigma|(A)=\int_{A}|f|d\mu.
+\end{align*}
+\end{example}
+
+
+\begin{definition}\label{def: positive and negative variations}
+Consider a finite real measure $\mu$ on some measurable space $(X, \m{A})$, define $|\mu|$ as before, and define
+\begin{align*}
+	\mu^{+}=\frac{1}{2}(|\mu|+\mu), \qquad \mu^{-}=\frac{1}{2}(|\mu|-\mu).
+\end{align*}
+Then both $\mu^{+}, \mu^{-}$ are positive measures on $\m{A}$, and they are bounded by \cref{thm: total variation is finite}. Furthermore
+\begin{align*}
+	\mu=\mu^{+}-\mu^{-}, \qquad |\mu|=\mu^{+}+\mu^{-}.
+\end{align*}
+The measures $\mu^{+}$ and $\mu^{-}$ are called the positive and negative variations of $\mu$, respectively. This representation of $\mu$ as a difference of the two positive measures $\mu^{+}$ and $\mu^{-}$ is known as the \textbf{Jordan decomposition } of $\mu$. This representation has a certain minimum property among all representations of $\mu$ as a defference of two positive measures. This fact will be shown in \cref{cor: Jordan decomp}.
+\end{definition}
+
+
+%%%%%%%%%%%%%%%%   ABSOLUTE CONTINUITY  %%%%%%%%%%%%%%%%
+\subsection{Absolute Continuity}
+
+Let $\mu$ be a positive measure on a measurable space $(X, \m{A})$, and let $\nu$ be an arbitrary measure (i.e. positive, real or complex) on the same space. We say that $\nu$ is \textbf{absolutely continuous} with respect to $\mu$, and write
+\begin{align*}
+	\nu \ll \mu
+\end{align*}
+if
+\begin{align*}
+	\forall A\in \m{A}: \mu(A) = 0 \Rightarrow \nu(A) = 0.
+\end{align*}
+If there is a set $B\in \m{A}$ for which $\nu(A)=\nu(A\cap B)$ for every $B\in \m{A}$, we say that $\nu$ is \textbf{concentrated} on $B$. We see that $\nu$ is concentrated on $B$ if and only if $\nu(A)=0$ for all $A\in \m{A}$ for which $A\cap B=\emptyset$.
+
+Suppose $\nu_{1}, \nu_{2}$ are arbitrary measures on $\m{A}$, and suppose there exists a pair of disjoint sets $A, B$ such that $\nu_{1}$ is concentrated on $A$, and $\nu_{2}$ is concentrated on $B$. Then we say that $\nu_{1}$ and $\nu_{2}$ are \textbf{mutually singular}, and write
+\begin{align*}
+	\nu_{1} \perp \nu_{2}.
+\end{align*}
+
+What follows are some elementary properties of these concept.
+
+\begin{proposition}\label{prop: abs cont properties}
+Suppose $\nu, \nu_{1}$ and $\nu_{2}$ are arbitrary measures on a measurable space $(X, \m{A})$, and $\mu$ is a positive measure. Then
+\begin{enumerate}
+\item If $\nu$ is concentrated on $A$, then so is $|\nu|$.
+\item If $\nu_{1} \perp \nu_{2}$ then $|\nu_{1}| \perp |\nu_{2}|$.
+\item If $\nu_{1} \perp \nu$ and $\nu_{2} \perp \nu$ then $\nu_{1} + \nu_{2} \perp \nu$.
+\item If $\nu_{1} \ll \mu$ and $\nu_{2} \ll \mu$ then $\nu_{1} + \nu_{2} \ll \mu$.
+\item If $\nu \ll \mu$, then $|\nu|\ll \mu$.
+\item If $\nu_{1}\ll \mu$ and $\nu_{2} \perp \mu$ then $\nu_{1} \perp \nu_{2}$.
+\item If $\nu \ll \mu$ and $\nu \perp \mu$, then $\nu \equiv 0$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+\begin{enumerate}
+\item If $B\cap A=\emptyset$ and $\{B_{i}\}$ is any partition of $B$, then $\nu(B_{i})=0$ for all $i$, hence $|\nu|(B)=0$.
+\item Immediate consequence of $1.$
+\item There are disjoint sets $A_{1},B_{1}$ such that $\nu_{1}$ is concentrated on $A_{1}$ and $\nu$ is concentrated on $B_{1}$, and there are disjoint sets $A_{2},B_{2}$ such that $\nu_{2}$ is concentrated on $A_{2}$ and $\nu$ is concentrated on $B_{2}$. But then $\mu_{1}+\mu_{2}$ is concentrated on $A:=A_{1} \cup A_{2}$, and $\nu$ is concentrated on $B:=B_{1} \cap B_{2}$, and $A\cap B= \emptyset$.
+\item Trivial by the definition.
+\item Suppose $\mu(A)=0$ and $\{A_{i}\}$ is a partition of $A$, then $\mu(A_{i})=0$ for all $i$ and since $\nu\ll \mu$ also $\nu(A_{i})=0$ for all $i$, this implies that $\sum|\nu(A_{i})|=0$ which in turn implies that $|\nu|(A)=0$.
+\item There are disjoint sets $A, B$ such that $\mu$ is concentrated on $A$, and $\nu_{1}$ is concentrated on $B$. Since $\nu_{1} \ll \mu$, there is a set $C\subseteq A$ such that $\nu_{1}$ is concentrated on $B$. But $C\cap B=\emptyset$ so $\nu_{1}, \nu_{2}$ are mutually singular.
+\item by $6.$, the assumption of $7.$ implies that $\nu \perp \nu$ which clearly forces $\nu \equiv 0$.
+\end{enumerate}
+\end{proof}
+
+The following theorem explains why the word ``continuity'' is used in the relation $\ll$.
+
+\begin{theorem}\label{thm: why it is called absolutely continuous}
+Let $\mu$ be a positive measure and $\nu$ a complex measure, both on the measurable space $(X, \m{A})$. Then the following are equivalent
+\begin{enumerate}
+\item $\nu \ll \mu$.
+\item $\forall \varepsilon>0, \exists \delta > 0, \forall A\in \m{A} : \mu(A)<\delta \Rightarrow |\nu(A)|<\varepsilon$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+Assume (2) holds and that $\mu(A)=0$ for some $A\in \m{A}$. Then $|\nu(A)|<\varepsilon$ for all $\varepsilon > 0$, hence $\nu(A) = 0$.
+
+Now assume that (2) does not hold. Then there is an $\varepsilon > 0$ and sets $A_{n}\in \m{A}$, $n=1, 2, \dots$ such that
+\begin{align*}
+	\mu(A_{n})<2^{-n}, \quad \text{while} \quad |\nu(A_{n})| \ge \varepsilon.
+\end{align*}
+Letting
+\begin{align*}
+	B_{n}=\bigcup_{i=n}^{\infty}A_{i}, \quad B=\cap_{n=1}^{\infty}B_{n}
+\end{align*}
+(i.e. $B=\lim\sup A_{i}$) we get
+\begin{align*}
+	\mu(B_{n})=\sum_{i=n}^{\infty}\mu(A_{i}) < 2^{-n+1}.
+\end{align*}
+Since $B_{1} \supseteq B_{2} \supseteq \dots$ we obtain $\mu(B)=0$, and
+\begin{align*}
+	|\nu|(B)=\lim_{n\to \infty} |\nu|(B_{n})\ge \lim_{n\to \infty} |\nu|(A_{n}) \ge \lim_{n\to \infty} |\nu(A_{n})| \ge \varepsilon.
+\end{align*}
+On the other hand, if (1) was true, then, for every measurable subset $E\subseteq B$, we would have $\nu(E)=0$, and therefore $|\nu|(E)=0$, which is a contradiction.
+\end{proof}
+
+
+\begin{lemma}\label{lem: function w}
+If $\mu$ is a positive $\sigma$-finite measure on a measurable space $(X, \m{A})$, then there is a function $w\in L^{1}(\mu)$ such that $0<w(x)<1$, for every $x\in X$.
+\end{lemma}
+\begin{proof}
+As $\mu$ is $\sigma$-finite, there is a countable partition $\{A_{n}\}_{n\in \N}$ of $X$, such that $\mu(A_{n})<\infty$. Put $w_{n}(x)=0$ if $x\in X\setminus A_{n}$ and put
+\begin{align*}
+	w_{n}(x)=2^{-n}\min\{1, \mu(A_{n})^{-1}\}
+\end{align*}
+if $x\in A_{n}$. Then $w:=\sum_{i=1}^{\infty}w_{n}$ has the required property. Indeed $w(x)>0$ since $X$ was the union of the sets $A_{n}$. Also $w(x)<1$ since the $A_{n}$ are disjoint, and $w\in L^{1}(\mu)$ since
+\begin{align*}
+	\int w(x)dx = \sum_{i=1}^{\infty} \min\left\{\frac{\mu(A_{n})}{2^{n}}, \frac{1}{2^{n}}\right\} \le 1.
+\end{align*}
+\end{proof}
+
+The point of the Lemma is that $\mu$ can be replaced by a finite measure $\tilde{\mu}$ (i.e. $d\tilde{\mu}=wd\mu$), such that $\mu$ and $\tilde{\mu}$ share their null-sets.
+
+We are now coming to the principal theorem on absolute continuity, and perhaps the most important in measure theory.
+
+\begin{theorem}[Lebesgue-Radon-Nikodym]
+Let $\mu$ be a positive $\sigma$-finite measure on a measurable space $(X,\m{A})$, and let $\nu$ be a complex measure on $\m{A}$. Then
+\begin{itemize}
+\item[(a)] there is a unique pair of complex measures $\nu_{a}$ and $\nu_{s}$ on $\m{A}$ such that
+\begin{align}
+	\nu=\nu_{a}+\nu_{s}, \qquad \nu_{a}\ll \mu, \quad \nu_{s} \perp \mu. \label{eq: lebesgue decomposition}
+\end{align}
+If $\nu$ is positive or finite, then so are $\nu_{a}$ and $\nu_{s}$. Furthermore
+\item[(b)] there is a unique $h\in L^{1}(\mu)$ such that
+\begin{align}
+	\nu_{a}(A)=\int_{A}h d\mu \label{eq: radon-nikodym}
+\end{align}
+for every set $A\in \m{A}$.
+\end{itemize}
+Especially, if $\nu\ll \mu$, i.e. $\nu_{s}\equiv 0$, then $\nu$ is of the form \eqref{eq: radon-nikodym}. Stated this way, the theorem is often just called the Radon-Nikodym theorem.
+\end{theorem}
+\begin{proof}
+First we assume that $\nu$ is a positive bounded measure on $\m{A}$. Find $w$ associated to $\mu$ as in \Cref{lem: function w}. Then $d\varphi=d\nu+wd\mu$ is a positive bounded measure $\varphi$ on $\m{A}$ ,and by the definition of the sum of two measures we have
+\begin{align*}
+	\int_{X}fd\varphi = \int_{X}fd\nu + \int_{X}fwd\mu
+\end{align*}
+for $f=\mathbbm{1}_{A}$, $A\in \m{A}$, hence for simple $f$, hence for any non-negative measurable $f$.
+
+If $f\in L^{2}(\varphi)$, the Schwarz inequality gives
+\begin{align*}
+	\left|\int_{X}fd\nu \right| \le \int_{X} |f|d\nu \le \int_{X}|f|d\varphi \le \left[ \int_{X}|f|^{2}d\varphi \right]^{1/2} [\varphi(X)]^{1/2}.
+\end{align*}
+So since $\varphi(X)<\infty$, we see that
+\begin{align*}
+	f\mapsto \int_{X}fd\nu
+\end{align*}
+is a bounded linear functional of $L^{2}(\varphi)$. Note that $L^{2}(\varphi)$ is a Hilbert space and since every bounded linear functional on a Hilbert space $H$ is, by the Riesz representation theorem, given by an inner product with an element of $H$ there exists a $g\in L^{2}(\varphi)$ such that
+\begin{align}
+	\int_{X}fd\nu=\int_{X}fgd\varphi \label{eq: functional as inner product}
+\end{align}
+for every $f\in L^{2}(\varphi)$.
+
+We see that $g$ is defined uniquely as an element of $L^{2}(\varphi)$, though it is only $\varphi$-a.e. unique as a point function on $X$.
+
+Apply \eqref{eq: functional as inner product} to $f=\mathbbm{1}_{A}$ for any $A\in \m{A}$, with $\varphi(A)>0$. Then \eqref{eq: functional as inner product} becomes
+\begin{align*}
+	\nu(A)=\int_{A}gd\varphi
+\end{align*}
+and since $0\le \nu \le \varphi$ we obtain
+\begin{align*}
+	0\le \frac{1}{\varphi(A)}\int_{A}gd\varphi=\frac{\nu(A)}{\varphi(A)}\le 1
+\end{align*}
+Hence by \cref{thm: average lies in S}, $g(x)\in [0,1]$ for $\varphi$-a.e $x\in X$.
+Therefore we may assume that $0\le g(x) \le 1$ for every $x\in X$, without affecting \eqref{eq: functional as inner product}, and thus write \eqref{eq: functional as inner product} as
+\begin{align}
+	\int_{X}(1-g)fd\nu=\int_{X}fgwd\mu. \label{eq: rewriting}
+\end{align}
+
+Let
+\begin{align*}
+	A:=\{x:0\le g(x) \le 1\}, \quad S:=\{x: g(x)=1 \}
+\end{align*}
+
+and define positive bounded measures $\nu_{a}$ and $\nu_{s}$ by
+\begin{align*}
+	\nu_{a}(B)=\nu(A\cap B), \qquad \nu_{s}(B)=\nu(S\cap B), \qquad \forall B\in \m{A}
+\end{align*}
+such that $\nu=\nu_{a}+\nu_{s}$.
+If $f=\mathbbm{1}_{S}$ in \eqref{eq: rewriting}, the left side becomes $0$, and the right side becomes $\int_{S}wd\mu$. So since $w(x)>0$ for all $x\in X$, we see that $\mu(S)=0$, and thus $\nu_{s} \perp \mu$.
+
+Since $g$ is bounded, we can replace $f$ in \eqref{eq: rewriting} by
+\begin{align*}
+	f=\mathbbm{1}_{B}(1+g+g^{2}+\dots+g^{n})
+\end{align*}
+for $n=1,2, \dots$ and $B\in \m{A}$. Writing \eqref{eq: rewriting} we get
+\begin{align}
+	\int_{B}(1-g^{n+1})d\nu = \int_{B}g\left(\sum_{i=0}^{n}g^{i}\right)wd\mu. \label{eq: hadf}
+\end{align}
+By definition $g(x)=1$ on $S$, so $1-g^{n+1}(x)=0$ on $S$. Furthermore $g^{n+1}(x)\to 0$ monotonically at every point $x\in A$. With this, the left side of \eqref{eq: hadf} converges to $\nu(A\cap B)=\nu_{a}(B)$ as $n\to \infty$.
+
+The integrand $\sum_{1}^{n+1}g$ increase monotonically to a nonnegative measurable limit $h$, and the monotone convergence theorem gives us that the right hand side of \eqref{eq: hadf} converges to $\int_{B}hd\mu$ as $n\to \infty$.
+
+We have thus shown, that \eqref{eq: radon-nikodym} holds for every $B\in \m{A}$. Taking $B=X$, we see that $h\in L^{1}(\mu)$, since $\nu_{a}(X)<\infty$. Furthermore since \eqref{eq: radon-nikodym} holds in this setting, we see that $\nu_{a}\ll \mu$ and the proof is complete under the restricted assumptions.
+
+If $\nu$ is a complex measure on $\m{A}$, then $\nu=\nu_{1}+i\nu_{2}$, for two real measures, $\nu_{1}, \nu_{2}$, and we can apply the first part of the proof to the positive and negative variations of $\nu_{1}$ and $\nu_{2}$. %%%% refer to positive and negative variations.
+\end{proof}
+
+
+
+The pair $\nu_{a}, \nu_{s}$ is called the \textbf{Lebesgue decomposition} of $\nu$ relative to $\mu$. The pair is unique, as is easily seen, for if $\nu_{a}',\nu_{s}'$ is another pair which satisfies \eqref{eq: lebesgue decomposition}, then
+\begin{align}
+	\nu_{a}'-\nu_{a}=\nu_{a}-\nu_{s}', \label{eq: unique decomposition}
+\end{align}
+but then $\nu_{a}'-\nu_{a}\ll \mu$ and $\nu_{s}-\nu_{s}'\perp \mu$, hence from \cref{prop: abs cont properties}(c), (d) and (g) we see that both sides of \eqref{eq: unique decomposition} are equal to 0.
+
+The function $h$ which occurs in \eqref{eq: radon-nikodym} is called the \textbf{Radon-Nikodym derivative} of $\nu_{a}$ with respect to $\mu$. This we denote by $d\nu_{a}=hd\mu$ or perhaps even $h=d\nu_{a}/ d\mu$. The above proof is due to von Neumann.
+
+
+%%%%%%%%%%%%%%%%   Consequences of the Lebesgue-Radon-Nikodym theorem  %%%%%%%%%%%%%%%%
+\subsection{Consequences of the Lebesgue-Radon-Nikodym Theorem}
+
+We recall that for a complex number $z\in C$ there is a $\theta\in [0,2\pi)$ such that $z=|z|\cdot e^{i\theta}$. We show a similar result for complex measures.
+
+\begin{theorem}\label{thm: polar representation}
+Let $\mu$ be a complex measure on a measurable space $(X, \m{A})$. Then there exists a measurable function $h$ such that $|h(x)|=1$ for all $x\in X$ and such that
+\begin{align}
+	d\mu=hd|\mu|. \label{eq: polar representation}
+\end{align}
+This is sometimes referred to as the \textbf{polar representation} of $\mu$.
+\end{theorem}
+\begin{proof}
+Obviously $\mu \ll |\mu|$, so the Radon-Nikodym theorem guarantees the existence of some $h\in L^{1}(|\mu|)$ that satisfies \eqref{eq: polar representation}. We have to show that $|h(x)|=1$ for all $x\in X$.
+
+Let $A_{r}:=\{|h(x)|<r\}$ for some positive $r\in \R$, and let $\{B_{i}\}$ be a partition of $A_{r}$. Then
+\begin{align*}
+	\sum_{i}|\mu(B_{i})|=\sum_{i}\left| \int_{B_{i}}hd|\mu| \right| \le \sum_{i} r|\mu|(B_{i})=r|\mu|(A_{r})
+\end{align*}
+Hence $|\mu|(A_{r})\le r|\mu|(A_{r})$. If $r<1$ this forces $|\mu|(A_{r})=0$, i.e. $\{|h(x)|<1\}$ is a $|\mu|$-null set, hence $|h|\ge 1$ $|\mu|$ almost everywhere.
+
+Conversely, if $|\mu|(A)>0$, \eqref{eq: polar representation} gives
+\begin{align*}
+	\left| \frac{1}{|\mu|(A)} \int_{A}hd|\mu| \right|=\frac{|\mu(A)|}{|\mu|(A)}\le 1
+\end{align*}
+Applying \cref{thm: average lies in S} with $S=\overline{B(0,1)}$ we see that $|h|\le 1$.
+
+For $B:=\{|h(x)|\neq 1\}$ we have shown that $|\mu|(B)=0$, so redefining $h$ such that $h(x)=1$ on $B$ (This does not change \eqref{eq: polar representation}) we obtain a function that satisfies the desired properties.
+\end{proof}
+
+We can now prove the claim in \cref{ex: example to prove}(b)
+\begin{theorem}\label{thm: later proof}
+Let $\mu$ be a positive measure on a measurable space $(X, \m{A})$, and $f\in L^{1}(\mu)$, then we saw that
+\begin{align*}
+	\sigma(A):=\int_{A}fd\mu, \quad A\in \m{A},
+\end{align*}
+is a complex measure. The total variation is given by
+\begin{align*}
+	|\sigma|(A)=\int_{A}|f|d\mu, \quad A\in \m{A}.
+\end{align*}
+\end{theorem}
+\begin{proof}
+By \cref{thm: polar representation} there is a function $h$ with $|h|=1$ such that $d\sigma=hd|\sigma|$. By assumption $d\sigma=fd\mu$ so $hd|\sigma|=fd\mu$. Thus $d|\sigma|=\overline{h}fd\mu$ and since $|\sigma|\ge 0$ and $\mu\ge 0$, it follows that $\overline{h}f\ge 0$ $\mu$ almost everywhere, so that $\overline{h}g=|g|$ $\mu$ almost everywhere.
+\end{proof}
+\text{ }\\
+We now prove a result about the positive and negative variations of a real measure $\mu$ from \cref{def: positive and negative variations}. This result shows that the positive and negative variations are mutually singular, such that all negative mass is concentrated on one set (called $N$) and all positive mass is concentrated on another set (called $P$).
+
+\begin{theorem}
+Let $\mu$ be a real measure on a measurable space $(X, \m{A})$. Then there exist sets $P,N\in \m{A}$ such that $P\cap N=\emptyset$ and $P\cup N = X$ and such that the positive and negative variations of $\mu$ satisfy
+\begin{align*}
+	\mu^{+}(A)=\mu(P\cap A), \quad \mu^{-}(A)=-\mu(N\cap A), \qquad A\in \m{A}.
+\end{align*}
+The pair $(P,N)$ is called the \textbf{Hahn decomposition} of $X$ induced by $\mu$.
+\end{theorem}
+\begin{proof}
+By \cref{thm: polar representation} there exists a function $h$ with $|h|=1$ such that $d\mu=hd|\mu|$. Since $\mu$ is real, so is $h$, $\mu$-almost everywhere, and therefore everywhere by redefining $h$ to be $\pm1$ on the null set where it is not real.
+Hence $h(x)=\pm 1$. Put
+\begin{align*}
+	P:=\{h(x)=1\}, \qquad N:=\{h(x)=-1\}.
+\end{align*}
+By definition $\mu^{+}=\frac{1}{2}(|\mu|+\mu)$, and since
+\begin{align*}
+	\frac{1}{2}(1+h)=\begin{cases}
+	h \quad \text{on } P \\
+	0 \quad \text{on } N
+	\end{cases}
+\end{align*}
+We have for any $A\in \m{A}$, that
+\begin{align*}
+	\mu^{+}(A)=\frac{1}{2}\left( \int_{A}1d|\mu|+\int_{A}hd|\mu| \right)=\frac{1}{2}\int_{A}(1+h)d|\mu|=\int_{P\cap A}hd|\mu|=\mu(P\cap A).
+\end{align*}
+Since $\mu(A)=\mu(P\cap A)+\mu(N\cap A)$ and since $\mu=\mu^{+}-\mu^{-}$ the rest of the argument follows from the first.
+\end{proof}
+\text{ } \\
+We can now show the minimum property of the Jordan decomposition discussed in \cref{def: positive and negative variations}.
+
+\begin{corollary}\label{cor: Jordan decomp}
+If $\mu=\nu_{1}-\nu_{2}$, where $\nu_{1},\nu_{2}$ are positive measures, then $\nu_{1}\ge \mu^{+}$ and $\nu_{2}\ge \mu^{-}$.
+\end{corollary}
+\begin{proof}
+Since $\mu\le \nu_{1}$ we get
+\begin{align*}
+	\mu^{+}(A)=\mu(P\cap A)\le \nu_{1}(P\cap A)\le \nu_{1}(A),
+\end{align*}
+and the rest follows.
+\end{proof}
+
+
+
+%%%%%%%%%%%%%%%%   Bounded linear functionals on L^{p}  %%%%%%%%%%%%%%%%
+\subsection{Bounded Linear Functionals on $L^{p}$}
+Let $\mu$ be a positive measure, suppose $1\le p \le \infty$, and let $q$ be the exponent conjugate to $p$, i.e. $\frac{1}{p}+\frac{1}{q}=1$. Hölder's inequality shows that if $g\in L^{q}(\mu)$ and if $T_{g}$ is given by
+\begin{align*}
+	T_{g}(f)=\int_{X}fgd\mu,
+\end{align*}
+then $T_{g}$ is a bounded linear functional on $L^{p}(\mu)$ with norm at most $\n{g}_{q}$. But do all bounded linear functionals on $L^{p}(\mu)$ have this form, and is this form unique? Essentially we are asking whether $L^{p}(\mu)^{*}=L^{q}(\mu)$ (isometric isomorphism). We shall now attempt to answer this question.
+
+For $p=\infty$ the answer is negative: 
+
+Let $f$ be any extreme point in the closed unit ball of $L^{1}([0,1], m)$ where $m$ is the Lebesgue measure. Let $F:[0,1] \to [0,1]$ be defined by $F(t)=\int_{[0,t]}|f(x)|dm(x)$, then $F$ is continuous, since for all $t_{0},t_{1}\in [0,1]$ (assume without loss of generality that $t_{0}<t_{1}$) we have
+\begin{align*}
+	|F(t_{0})-F(t_{1})|=\left| \int_{t_{1}}^{t_{0}}|f(x)|dm(x) \right| \le \n{f}_{1}|t_{0}-t_{1}|.
+\end{align*}
+With this, we also see that $\n{F}\le\n{f}_{1}<\infty$. Since $F$ is continuous there exists a $c\in [0,1]$ such that $F(c)=\frac{1}{2}\n{f}_{1}$. Put $g_{1}=2f|_{[0,c]}$ and $g_{2}=2f|_{[c,1]}$, thus $g_{1},g_{2}$ both lie in the closed unit ball of $L^{1}([0,1],m)$. But $g_{1}\neq f \neq g_{2}$ and $f=\frac{1}{2}(g_{1}+g_{2})$ which is in contradiction with the assumption that $f$ was in the closed unit ball. Hence the closed unit ball of $L^{1}([0,1], m)$ has no extreme points.
+
+Now if $L^{1}([0,1],m)$ was the dual of a Banach space, its closed unit ball would, by the Krein-Milman theorem, have extreme points, therefore from what we have just shown, $L^{1}([0,1], m)$ is not a dual space of a Banach space.
+
+However for $1<p<\infty$ the answer is affirmative. It is also true for $p=1$ if we assume that the measure in question is $\sigma$-finite, so we shall confine ourselves to this case.
+
+\begin{theorem}\label{thm: p dual of q}
+Suppose $1\le p < \infty$, $\mu$ is a $\sigma$-finite positive measure on $X$ and $T$ is a bounded linear functional on $L^{p}(\mu)$. Then there is a unique $g\in L^{q}(\mu)$ where $\frac{1}{p}+\frac{1}{q}=1$ such that
+\begin{align}
+	Tf=\int_{X}fgd\mu, \quad f\in L^{p}(\mu). \label{eq: related T and g}
+\end{align}
+Moreover, if $T$ and $g$ are related as in \eqref{eq: related T and g}, then
+\begin{align}
+	\n{T}=\n{g}_{q}. \label{eq: equality of norms}
+\end{align}
+In other words, $L^{q}(\mu)=L^{p}(\mu)^{*}$ (isometric isomorphism).
+\end{theorem}
+\begin{proof}
+If $g,g'$ satisfy \eqref{eq: related T and g} then for any $A\in \m{A}$ with $\mu(A)<\infty$ we have 
+\begin{align*}
+	\int_{A}g-g'd\mu=\int_{A}\mathbbm{1}_{A}gd\mu-\int_{A}\mathbbm{1}_{A}g'd\mu=T(\mathbbm{1}_{A})-T(\mathbbm{1}_{A})=0
+\end{align*}
+and the $\sigma$-finiteness of $\mu$ implies therefore that $g=g'$ $\mu$ almost everywhere, proving the uniqueness of $g$.
+
+If \eqref{eq: related T and g} holds, then Hölder's inequality implies
+\begin{align*}
+	\n{T}\le \n{g}_{q}.
+\end{align*}
+So it remains to prove that $g$ exists and that $\n{T}\ge \n{g}_{q}$. If $\n{T}=0$, then \eqref{eq: related T and g} and \eqref{eq: equality of norms} holds with $g\equiv 0$. So we can assume $\n{T}>0$.
+
+We first consider the case when $\mu(X)<\infty$. For any $A\in \m{A}$ define
+\begin{align*}
+	\nu(A)=T(\mathbbm{1}_{A}).
+\end{align*}
+Now $T$ is linear, and $\mathbbm{1}_{A\cup B}=\mathbbm{1}_{A}+\mathbbm{1}_{B}$ if $A\cap B=\emptyset$, so $\nu$ is additive. To show countable additivity, let $\{A_{i}\}$ be a countable partition of $A$, let $B_{k}=\bigcup_{1}^{k}A_{i}$, and observe that
+\begin{align*}
+	\n{\mathbbm{1}_{A} -  \mathbbm{1}_{B_{k}} }_{p}=(\int_{X}(\mathbbm{1}_{A} -  \mathbbm{1}_{B_{k}})^{p}d\mu)^{1/p}=\mu(A-B_{k})^{1/p}\to 0, \qquad k\to \infty
+\end{align*}
+Here, the assumption that $p<\infty$ is used. Since $T$ is continuous we have $\nu(B_{k})\to \nu(A)$, so $\nu$ is a complex measure. It is clear that $\nu(A)=0$ whenever $\mu(A)=0$ since then $\n{\mathbbm{1}_{A}}_{p}=0$. Hence $\nu \ll \mu$ and the Radon-Nikodym theorem ensures the existence of a function $g\in L^{1}(\mu)$  such that for every $A\in \m{A}$
+\begin{align}
+	T(\mathbbm{1}_{A})=\int_{A}gd\mu=\int_{X}\mathbbm{1}_{A}gd\mu. \label{eq: kfa}
+\end{align}
+By linearity of $T$ it follows that 
+\begin{align}
+	Tf=\int_{X}fgd\mu \label{eq: T works for all f}
+\end{align}
+for every simple measurable function $f$, and so also for every $f\in L^{\infty}(\mu)$ since every such function $f$ is the uniform limit of simple functions $f_{i}$. Note that the uniform convergence of $f_{i}$ to $f$ implies $\n{f_{i}-f}_{p}\to 0$ hence $Tf_{i}\to Tf$ as $i\to \infty$.
+
+To conclude that $g\in L^{q}(\mu)$ and that \eqref{eq: equality of norms} holds, it is best to split the argument into two cases.
+
+1: If $p=1$, \eqref{eq: kfa} shows that
+\begin{align*}
+	\left| \int_{A}gd\mu\right| \le \n{T}\cdot \n{\mathbbm{1}_{A}}_{1}=\n{T}\cdot\mu(A)
+\end{align*}
+for every $A\in \m{A}$. By \cref{thm: average lies in S} $|g(x)|\le \n{T}$ $\mu$-almost everywhere, hence $\n{g}_{\infty}\le \n{T}$.
+
+2: If $1<p<\infty$ there is a measurable function $x\mapsto \alpha(x)$, such that $|\alpha|=1$ and $\alpha g=|g|$. Let $A_{n}:=\{|g(x)|\le n\}$ and define $f:=\mathbbm{1}_{A_{n}}|g|^{q-1}\alpha$. Then $|f|^{p}=|g|^{q}$ on $A_{n}$, $f\in L^{\infty}(\mu)$ and \eqref{eq: T works for all f} gives us that
+\begin{align*}
+	\int_{A_{n}}|g|^{q}d\mu=\int_{X}fgd\mu=Tf\le \n{T}\left[ \int_{A_{n}}|g|^{q}d\mu \right]^{1/p},
+\end{align*}
+hence
+\begin{align*}
+	\int_{X}\mathbbm{1}_{A_{n}}|g|^{q}d\mu \le \n{T}^{q}, \qquad n=1,2, \dots
+\end{align*}
+We now apply the monotone convergence theorem to this and obtain $\n{g}_{q}\le \n{T}$ as wanted. So \eqref{eq: equality of norms} holds and $g\in L^{q}(\mu)$.
+
+It follows that both sides of \eqref{eq: T works for all f} are continuous functions on $L^{p}(\mu)$, they coincide on the dense subset $L^{\infty}(\mu)$ of $L^{p}(\mu)$ so they coincide on all of $L^{p}(\mu)$ which completes the proof for the case when $\mu(X)<\infty$.
+
+If $\mu(X)=\infty$ but $\mu$ is $\sigma$-finite choose $w\in L^{1}(\mu)$ from \Cref{lem: function w}. Then $d\tilde{\mu}=wd\mu$ defines a finite measure on $\m{A}$ and
+\begin{align*}
+	F\mapsto w^{1/p}F
+\end{align*}
+is a linear isometry of $L^{p}(\tilde{\mu})$ onto $L^{p}(\mu)$, since $w(x)>0$ for all $x\in X$, as is easily checked.
+
+Hence
+\begin{align*}
+	S(F)=T(w^{1/p}F)
+\end{align*}
+defines a bounded linear functional $S$ on $L^{p}(\tilde{\mu})$ with $\n{S}=\n{T}$.
+The first part of this proof shows now that there exists a function $G\in L^{q}(\tilde{\mu})$ satisfying
+\begin{align*}
+	S(F)=\int_{X}FGd\tilde{\mu}, \qquad F\in L^{p}(\tilde{\mu})
+\end{align*}
+Letting $g=w^{1/q}G$ (or if $p=1$, $g=G$), we see that
+\begin{align*}
+	\int_{X}|g|^{q}d\mu=\int_{X}|G|d\tilde{\mu}=\n{S}^{q}=\n{T}^{q}
+\end{align*} 
+if $p>1$, whereas $\n{g}_{\infty}=\n{G}_{\infty}=\n{S}=\n{T}$ if $p=1$. Thus \eqref{eq: equality of norms} holds, and since $Gd\tilde{\mu}=w^{1/p}gd\mu$, we at last see
+\begin{align*}
+	T(f)=S(w^{-1/p}f)=\int_{X}w^{-1/p}fGd\tilde{\mu}=\int_{X}fgd\mu
+\end{align*}
+for every $f\in L^{p}(\mu)$ as wanted.
+\end{proof}
+
+The special case $p=q=2$ is a general fact about Hilbert spaces (recall that $L^{2}(\mu)$ is a Hilbert space), i.e. any bounded linear functional $T:L^{2}(\mu)\to \C$ is given as the scalar product with an $L^{2}$-function $\overline{g}$:
+\begin{align*}
+	Tf=\int fg d\mu=\langle f,\overline{g} \rangle
+\end{align*}
+This is a consequence of the Riesz Representation theorem.
+
+%%%%%%%%%%%%%%%%  Riesz?Markov?Kakutani representation theorem   %%%%%%%%%%%%%%%%
+\subsection{The Riesz-Markov Theorem}
+Let $X$ be a locally compact Hausdorff space. \cref{thm: Riesz-Markov-Kakutani representation theorem} characterizes the \textbf{positive} linear functionals on $C_{c}(X)$. We are now able to characterize the \textbf{bounded} linear functionals $T$ on $C_{c}(X)$. Now $C_{c}(X)$ is a dense subspace of $C_{0}(X)$ relative to the supremum norm, so every such $T$ has a unique extension to a bounded linear functional on $C_{0}(X)$ (see theorem 13.3 in \cite{Musat17}). Hence we can just as well assume we are dealing with the Banach space $C_{0}(X)$.
+
+If $\mu$ is a complex Morel measure, \cref{thm: polar representation} ensures the existence of a complex Borel measurable function $h$ with $|h|=1$ such that $d\mu=hd|\mu|$. It is therefore reasonable to define integration with respect to a complex measure $\mu$ by the formula
+\begin{align*}
+	\int fd\mu=\int fhd|\mu|.
+\end{align*}
+and we get $\int \mathbbm{1}_{A}d\mu=\mu(A)$. Thus
+\begin{align*}
+	\int_{X}\mathbbm{1}_{A}d(\mu+\nu)=(\mu+\nu)(A)=\mu(A)+\nu(A)=\int_{X}\mathbbm{1}_{A}d\mu+\int_{X}\mathbbm{1}_{A}d\nu
+\end{align*}
+when $\mu$ and $\nu$ are complex measures on $\m{A}$ and $A\in \m{A}$. This leads to the addition formula
+\begin{align*}
+	\int_{X} fd(\mu+\nu)=\int_{X}fd\mu+\int_{X}fd\nu
+\end{align*}
+which is valid for every bounded measurable $f$.
+
+We will call a complex Borel measure, $\mu$ on $X$ regular, if $|\mu|$ is regular in the sense of \cref{def: regular}. If $\mu$ is a complex Borel measure on $X$, it is clear that the mapping
+\begin{align*}
+	f\mapsto \int_{X}fd\mu
+\end{align*}
+is a bounded linear functional on $C_{0}(X)$, with norm no larger that $|\mu|(X)$.
+It is the content of the Riesz-Markov theorem, that every such bounded linear functional on $C_{0}(X)$ arise in this way.
+
+
+\begin{theorem}[Riesz-Markov]\label{thm: Riesz-markov}
+Let $X$ be a locally compact Hausdorff space. For any bounded linear functional $T$ on $C_{0}(X)$ there is a unique regular complex Borel measure $\mu$ on $X$ such that
+\begin{align}
+	Tf=\int_{X}fd\mu \label{eq: rep of lin func}
+\end{align}
+for every $f\in C_{0}(X)$. Furthermore
+\begin{align}
+	\n{T}=|\mu|(X) \label{eq: jadfhsadf}
+\end{align}
+\end{theorem}
+\begin{proof}
+First, if $T=0$, \eqref{eq: rep of lin func} is satisfied by $\mu=0$, so assume $T\neq 0$.
+To show uniqueness, assume $\nu, \lambda$ are regular complex Borel measures on $X$ satisfying \eqref{eq: rep of lin func}. It is easy to see that $\mu:=\lambda-\nu$ is also regular. Now since they both satisfy \eqref{eq: rep of lin func}, we have $\int_{X}fd\mu=0$ for all $f\in C_{0}(X)$, and we have to prove that $\mu=0$. By \cref{thm: polar representation} there exists a Borel measurable function $h\in L^{1}(|\mu|)$ with $|h|=1$, such that $d\mu=hd|\mu|$. For any sequence $\{f_{n}\}$ in $C_{0}(X)$ we can then write
+\begin{align*}
+	|\mu|(X)=\int_{X}(\overline{h}-f_{n})hd|\mu|\le \int_{X}|\overline{h}-f_{n}|d|\mu|,
+\end{align*}
+and since $C_{c}(X)$ is dense in $L^{1}(|\mu|)$ (see Theorem 3.14 in \cite{Rudin87}), $\{f_{n}\}$ can be chosen so that the last expression tends to $0$ as $n\to \infty$. Thus $|\mu|(X)=0$, thus $\mu=0$, which settles the uniqueness.
+
+Now given a bounded linear functional $T$ on $C_{0}(X)$, we can without loss of generality assume that $\n{T}=1$. Our aim will be to construct a \textbf{positive} linear functional $S$ on $C_{c}(X)$ such that
+\begin{align}
+	|Tf| \le S(|f|)\le \n{f}, \qquad f\in C_{c}(X), \label{eq: ineq of lin funcs}
+\end{align}
+where $\n{f}$ denotes the supremum norm. Once we have this $S$, we can associate with is a positive Borel measure $\nu$ as in \cref{thm: Riesz-Markov-Kakutani representation theorem}. The conclusion of \cref{thm: Riesz-Markov-Kakutani representation theorem} is that $\nu$ is regular if $\nu(X)<\infty$. Since
+\begin{align*}
+	\nu(X)=\sup\{ Sf: 0 \le f \le 1,  f\in C_{c}(X) \}
+\end{align*}
+and since $|Sf| \le 1$ if $\n{f} \le 1$, we see that actually $\nu(X)\le 1$.
+
+From \eqref{eq: ineq of lin funcs} we can further deduce that
+\begin{align*}
+	|Tf| \le S(|f|) = \int_{X} |f| d\nu = \n{f}_{1}, \qquad f\in C_{c}(X)
+\end{align*}
+where the last norm refers to the space $L^{1}(\nu)$. Thus $T$ is a linear functional on $C_{c}(X)$ of norm at most $1$ with respect to the $L^{1}(\nu)$-norm on $C_{c}(X)$. By Hahn-Banach there is a norm-preserving extension of $T$ to a linear functional on $L^{1}(\nu)$ and therefore \cref{thm: p dual of q} (the case $p=1$) gives a Borel measurable function $g\in L^{\infty}(\nu)$ with $|g| \le 1$ such that
+\begin{align}
+	Tf=\int_{X}fgd\nu, \qquad f\in C_{c}(X) \label{eq: idno}
+\end{align}
+Each side of \eqref{eq: idno} is a continuous functional on $C_{0}(X)$ and $C_{c}(X)$ is dense in $C_{0}(X)$, hence \eqref{eq: idno} holds for all $f\in C_{0}(X)$ and so \eqref{eq: rep of lin func} holds with $d\mu=g d\nu$.
+
+Since $\n{T}=1$, \eqref{eq: idno} shows that
+\begin{align*}
+	\int_{X} |g| d\nu \ge \sup\{ |Tf| : f\in C_{0}(X), \n{f} \le 1 \} = 1.
+\end{align*}
+But since $\nu(X) \le 1$ and $|g| \le 1$ this forces $\nu(X)=1$ and $|g|=1$ $\nu$-almost everywhere. Thus $d|\mu| = |g| d\nu = d\nu$, by \cref{thm: later proof} and
+\begin{align*}
+	|\mu| (X) = \nu(X) = 1 = \n{T}
+\end{align*}
+which proves \eqref{eq: jadfhsadf}.
+
+Thus all we have to do, is find a positive linear functional $S$ that satisfies \eqref{eq: ineq of lin funcs}.
+
+First assume that $f\in C_{c}^{+}(X)$ (the class of all non-negative real members of $C_{c}(X)$), and define
+\begin{align*}
+	Sf=\sup\{ |Th| : h\in C_{c}(X), |h| \le f \}.
+\end{align*}
+Then $Sf \ge 0$, $S$ satisfies \eqref{eq: ineq of lin funcs}, $0 \le f_{1} \le f_{2}$ implies $Sf_{1} \le Sf_{2}$, and $S(cf)=cSf$ if $c$ is a positive constant. We have to show that
+\begin{align}
+	S(f+g)=Sf+Sg, \qquad f,g\in C_{c}^{+}(X) \label{eq: linearity}
+\end{align}
+and then we have to extend $S$ to a linear functional on $C_{c}(X)$.
+
+Let $f,g\in C_{c}^{+}(X)$. For $\varepsilon > 0$ there exists $h_{1},h_{2}\in C_{c}(X)$ such that $|h_{1}|\le f$, $|h_{2}|\le g$, and
+\begin{align*}
+	Sf \le |Th_{1}| + \varepsilon, \qquad Sg \le |Tg| + \varepsilon.
+\end{align*}
+Now there are complex numbers $\alpha_{i}\in \C$, with $|\alpha_{i}|=1$ such that $\alpha_{1}T(h_{i})=|T(h_{i})|$ for $i=1,2$.
+Then
+\begin{align*}
+	Sf+Sg &\le |T(h_{1})| + |T(h_{2})| + 2\varepsilon \\
+	&= T(\alpha_{1}h_{1} + \alpha_{2}h_{2}) + 2\varepsilon \\
+	&\le S(|h_{1}| + |h_{2}|) + 2\varepsilon \\
+	&\le S(f+g) + 2\varepsilon
+\end{align*}
+hence the inequality $\ge$ holds in \eqref{eq: linearity}.
+
+Next, let $h\in C_{c}(X)$ be such that $|h| \le f + g$, let $V:=\{ x: f(x) + g(x) > 0 \}$, and define
+\begin{align*}
+	h_{1}(x)&:= \frac{f(x)h(x)}{f(x)+g(x)}, \qquad h_{2}(x):=\frac{g(x)h(x)}{f(x)+g(x)}, \quad x\in V \\
+	h_{1}&=h_{2}:=0, \qquad x\not\in V.
+\end{align*}
+It is clear that $h_{1}$ is continuous at all points of $V$. If $x_{0}\not\in V$ then $h(x_{0})=0$, so since $h$ is continuous and $|h_{1}(x)| \le |h(x)|$ for all $x\in X$, it follows that $x_{0}$ is a point of continuity of $h_{1}$. Thus $h_{1}\in C_{c}(X)$ and the same argument applies to $h_{2}$.
+Since $h_{1}+h_{2}=h$ and $|h_{1}| \le f$, $|h_{2}| \le g$, we have
+\begin{align*}
+	|Th| = |T(h_{1}) + T(h_{2})| \le |T(h_{1})| + |T(h_{2})| \le Sf + Sg.
+\end{align*}
+Hence $S(f+g) \le Sf + Sg$ and we have shown equality in \eqref{eq: linearity}.
+
+If $f$ is now a real function $f\in C_{c}(X)$, define $2f^{+}=|f|+f$. Then $f^{+}\in C_{c}^{+}(X)$, and if we define $f^{-}$ similarly, then $f^{-}\in C_{c}^{+}(X)$ and since $f=f^{+}-f^{-}$, it is natural to define
+\begin{align*}
+	Sf=Sf^{+} - Sf^{-}, \qquad f\in C_{c}(X), f \text{ real}
+\end{align*}
+and
+\begin{align*}
+	S(u+iv)=Su+ iSv.
+\end{align*}
+Simple algebraic manipulations now show that our extended functional $S$ is linear on $C_{c}(X)$. This completes the proof.
+\end{proof}
+
+
+
+
+
+
+
+

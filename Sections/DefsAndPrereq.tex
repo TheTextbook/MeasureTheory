@@ -1,0 +1,105 @@
+\section{Definitions and preliminaries}
+
+In the course of this thesis, we will among others need the following definitions.
+
+%%%%%%%%%%%%%%%%   Partition  %%%%%%%%%%%%%%%%
+
+\begin{definition}
+A partition of a set $A$, is a family, $\{A_{i}\}_{i\in \N}$ of subsets of $A$, satisfying:
+\begin{itemize}
+\item $A_{i} \cap A_{j} = \emptyset$ for all $i, j\in \N$ with $i \neq j$,
+\item $\bigcup_{i\in \N} A_{i}=A$.
+\end{itemize}
+\end{definition}
+
+%%%%%%%%%%%%%%%%   Sigma-algebra, measurable space, and measures  %%%%%%%%%%%%%%%%
+
+\begin{definition}
+A $\sigma$-algebra, $\m{A}$, on a set $X$, is a family of subsets of $X$ satisfying
+\begin{itemize}
+\item $X\in \m{A}$,
+\item $A \in \m{A} \Rightarrow A^{c}\in \m{A}$,
+\item $A_{1}, A_{2}, \dots \in \m{A} \Rightarrow \bigcup_{i\in \N} A_{i} \in \m{A}$.
+\end{itemize}
+\end{definition}
+
+If $\m{A}$ is a $\sigma$-algebra on $X$, we call $(X, \m{A})$ a measurable space.
+
+\begin{definition}
+Let $(X,\m{A})$ be a measurable space. A (positive) measure is a set function $\mu:\m{A} \to [0,\infty]$ satisfying:
+\begin{itemize}
+\item $\mu(\emptyset) = 0$,
+\item For all collections $\{A_{i}\}_{i\in N}$ of pairwise disjoint sets,
+\begin{align*}
+	\mu\left(\bigcup_{i\in \N} A_{i}\right) = \sum_{i\in \N} \mu(A_{i})
+\end{align*}
+\end{itemize}
+The last property is called \textbf{countable additivity} or $\textbf{$\mathbf{\sigma}$-additivity}$.
+\end{definition}
+
+If $\mu:(X,\m{A})\to [0, \infty]$ is a measure, we call $(X, \m{A}, \mu)$ a measure space. However this notation is at times cumbersome, so often we will just denote the measure(-able) space: $\m{A}$ when the set and measure in question is obvious or subordinate.
+
+We can generalize the notion of a positive measure by the following
+
+\begin{definition}
+A real (or signed) measure on a $\sigma$-algebra $\m{A}$, is a set function $\mu: \m{A} \to [-\infty, \infty]$ which is countably additive, and where $\mu(\emptyset)=0$. Since a real measure is countably additive, it can take on the value $+\infty$ or $-\infty$ but not both.
+\end{definition}
+
+
+\begin{definition}
+Let $(X, \m{A})$ be a measurable space, and $Y$ a topological space. A mapping $f: X \to Y$ is said to be measurable if $f^{-1}(U)\in \m{A}$ for all open sets $U$ in $Y$.
+\end{definition}
+
+\begin{definition}
+A subset $A$ of a set $X$ is called convex if for any $x,y \in A$, and all $\alpha \in (0,1)$ we have
+\begin{align*}
+	\alpha x + (1-\alpha)y \in A
+\end{align*}
+\end{definition}
+
+\begin{theorem}\label{thm: average lies in S}
+Suppose $\mu$ is a finite positive measure on a measurable space $(X, \m{A})$, $f\in L^{1}(\mu)$, $S$ is a closed set in $\C$, and the averages
+\begin{align*}
+	A_{B}(f)=\frac{1}{\mu(B)}\int_{B}fd\mu
+\end{align*}
+lie in $S$ for every $B\in \m{A}$ with $\mu(B)>0$. Then $f(x)\in S$ for $\mu$ almost all $x \in X$.
+\end{theorem}
+\begin{proof}
+For $r>0$, let $\Delta=\overline{B(\alpha, r)}\subseteq S^{c}$. Since $S^{c}$ is the union of countably many such discs, it is enough to prove that $\mu(B)=0$, where $B=f^{-1}(\Delta)$.
+
+If $\mu(B)>0$, we would have
+\begin{align*}
+	|A_{B}(f)-\alpha| = \frac{1}{\mu(B)} \left| \int_{B}(f-\alpha)d\mu \right| \le \frac{1}{\mu(B)} \int_{B}|f-\alpha|d\mu \le r,
+\end{align*}
+which is impossible, since $A_{B}(f)\in S$ by assumption. Hence $\mu(B)=0$.
+\end{proof}
+
+\begin{definition}\label{def: regular}
+A Borel measure $\mu$ on a topological space $(X, \tau)$, is a measure defined on all open sets, $U\in \tau$, hence defined on all the Borel sets. A non-negative Borel measure on a locally compact Hausdorff space $X$ is called regular if
+\begin{enumerate}
+\item $\mu(K)<\infty$ for every compact $K$,
+\item (Outer regularity) For every Borel set $A$
+\begin{align*}
+	\mu(A)=\inf\{ \mu(U) | A\subseteq U, U \text{ open} \}
+\end{align*}
+\item (Inner regularity) For every open set $A$, or measurable set $A\in \m{A}$ with $\mu(A)<\infty$
+\begin{align*}
+	\mu(A)=\sup\{ \mu(K) | K\subseteq A, K \text{ compact} \}.
+\end{align*}
+\end{enumerate}
+\end{definition}
+
+We state without proof the following theorem, which we prove in a more general case in \cref{thm: Riesz-markov}.
+
+\begin{theorem}[Riesz-Markov-Kakutani representation theorem]\label{thm: Riesz-Markov-Kakutani representation theorem}
+Let $X$ be a locally compact Hausdorff space, and let $T$ be a positive linear functional on $C_{c}(X)$. Then there exists a $\sigma$-algebra $\m{A}$ in $X$ which contains all Borel sets in $X$, and there exists a unique regular positive measure $\mu$ on $\m{A}$ satisfying
+\begin{align*}
+	Tf=\int_{X}fd\mu
+\end{align*}
+for every $f\in C_{c}(X)$.
+\end{theorem}
+
+To clarify, a positive linear functional, $T$, is a linear functional satisfying that if $f(X)\subseteq [0,\infty)$, then $T(f)\in [0,\infty)$.
+
+
+

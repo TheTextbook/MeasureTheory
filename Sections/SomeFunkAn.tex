@@ -1,0 +1,147 @@
+\section{Some Functional Analysis}
+
+The remainder of this thesis will be focused towards proving Liapunoff's theorem yet again, but using tools of functional analysis. It is these tools that we will now develop. This section is based on the FunkAn course by Magdalena Musat, and specifically on her lecture notes \cite{Musat17} for the course.
+
+For this the second proof of Liapunoff's theorem, by Lindenstrauss \cite{Lindenstrauss66}, we will need the Banach-Alaoglu theorem and the Krein-Milman theorem, which, with the necessary preliminaries, will be introduced in the following.
+
+In the following $X$ will be a vector space over $\mathbb{K}=\C$ or $\R$. If a normed space $(X, \Vert \cdot \Vert)$ is complete with respect to the metric induced by the norm, i.e. $d(x,y):=\Vert x - y \Vert$, it is called a Banach space.
+
+\begin{example}(Examples of Banach spaces)
+If $(X, \mu)$ is a measure space, we define the Lebesgue spaces $L_{p}(X, \mu)$ for $1\le p < \infty$ by
+\begin{align*}
+	L_{p}(X, \mu) := \left\{ f: X \to \mathbb{K} measurable : \Vert f \Vert_{p}:= \left( \int_{X}|f(x)|^{p}d\mu(x) \right)^{\frac{1}{p}} < \infty \right\},
+\end{align*}
+and $L_{\infty}(X, \mu)$ to be the (classes) of measurable functions which are bounded except possibly on a subset of $X$ of measure zero.
+We say that two measurable functions are equal if they are equal $\mu$ almost everywhere, hence the word ``class''.
+The Lebesgue spaces are all Banach spaces with respect to the corresponding $\Vert\cdot\Vert$-norm for $1\le p \le \infty$
+\end{example}
+
+If $\mu=\tau$ (the counting measure), and $X=\N$ (now $X$ is not a vector space over $\K$) we usually write $l_{p}(\N)$.
+
+%%%%%%%%%%%%%%%%   LINEAR MAPS  %%%%%%%%%%%%%%%%
+
+\begin{definition}
+Let $X,Y$ be normed vector spaces over $\K$. A map $T:X\to Y$ is called linear if
+\begin{align*}
+	T(\alpha x + \beta y) = \alpha T(x) + \beta T(y), \quad x,y\in X, \alpha,\beta \in \K
+\end{align*}
+We see that if $T$ is linear, then $T(0)=0$
+\end{definition}
+
+\begin{proposition}\label{prop: linear map equivalences}
+Let $T:X\to Y$ be a linear map between normed vector spaces. The following are equivalent
+\begin{itemize}
+\item[(1)] $T$ is continuous on $X$, \label{itm: cont on X}
+\item[(2)] $T$ is continuous at 0, \label{enum: cont at 0}
+\item[(3)] There exists $C>0$ such that $\Vert Tx \Vert \le C\Vert x \Vert$ for all $x\in X$. \label{enum: T bounded}
+\end{itemize}
+(In this case we say that $T$ is bounded).
+\end{proposition}
+\begin{proof}
+We only need to prove $(2) \Rightarrow (3)$ and $(3)\Rightarrow (1)$. We first show $(2) \Rightarrow (3)$. By continuity of $T$ at $0$ there exists an $r>0$ such that $T(B_{X}(0,r))\subseteq B_{y}(0,1)$, i.e. if $y\in X$ with $\n{y} < r$ then $\n{Ty} \le 1$. Set $C:=\frac{2}{r}$. Now for an $x\in X$, since $\left\Vert \frac{rx}{2\n{x}} \right\Vert < r$ we have
+\begin{align*}
+	\Vert Tx \Vert = \left\Vert T\left( \frac{2}{r}\n{x} \frac{rx}{2\n{x}}  \right) \right\Vert = \frac{2}{r} \n{x} \left\Vert T\left( \frac{rx}{2\n{x}} \right) \right \Vert \le C \n{x},
+\end{align*}
+as wanted.
+
+To show $(3)\Rightarrow (1)$, let $x,x_{n}\in X$ so $x_{n}$ converges to $x$, i.e. $\lim_{n\to \infty}\n{x_{n}-x}=0$. From $(3)$ and the linearity of $T$ we see that
+\begin{align*}
+	\n{Tx_{n}-Tx} = \n{T(x_{n}-x)} \le C\n{x_{n}-x}, \quad n\ge 1
+\end{align*}
+which implies that $\lim_{n\to \infty}\n{Tx_{n}-Tx}=0$ as wanted.
+\end{proof}
+
+Let $\m{L}(X,Y):=\{ T : X \to Y continuous linear map \}$. Then $\m{L}(X,Y)$ is a vector space over $\K$.
+\begin{remark}
+For $T\in \m{L}(X, Y)$ we define
+\begin{align}
+	\n{T}:=\sup \{ \n{Tx} | \n{x} \le 1 \} \label{eq: norm of map}
+\end{align}
+Then by \cref{prop: linear map equivalences}, $\n{T}<\infty$. Furthermore
+\begin{align*}
+	\n{T} = \sup \{ \n{Tx} | \n{x} = 1 \}
+\end{align*}
+It is indeed clear by definition \eqref{eq: norm of map} that $\n{T}\ge \sup \{ \n{Tx} | \n{x} = 1 \}$. For the reverse inequality we will show that for all non-zero $x\in X$ with $\n{x}\le1$ there exists a $y_{x}\in Y$ such that $\n{y_{x}}=1$ and $\n{Tx}\le \n{Ty_{x}}$. So for such an $x\in X$, let $y_{x}:=\frac{x}{\n{x}}$. Now $\n{y_{x}}=1$ and 
+\begin{align*}
+	\n{Ty_{x}} = \left\Vert T\left(\frac{x}{\n{x}}\right) \right\Vert=\frac{\n{Tx}}{\n{x}}\ge \n{Tx}
+\end{align*}
+as wanted. Furthermore, we see that
+\begin{align}
+	\n{Tx} \le \n{T}\n{x}, \quad x\in X. \label{eq: map ineq}
+\end{align}
+If $x=0$ this is clear, and for $x\neq 0$, we have that \eqref{eq: map ineq} is equivalent to $\n{T(x/\n{x})}\le \n{T}$, which is true by the definition of $\n{T}$.
+\end{remark}
+
+It is easy to check that $\m{L}(X,Y)$ is a normed space. Furthermore:
+\begin{theorem}
+If $Y$ is a Banach space, then $(\m{L}(X, Y), \n{\cdot})$ is a Banach space.
+\end{theorem}
+\begin{proof}
+Let $(T_{n})_{n\in \N}$ be a Cauchy sequence in $\m{L}(X,Y)$, i.e. given $\varepsilon > 0$ there exists an $N_{\varepsilon}\ge 1$ such that
+\begin{align*}
+	\n{T_{n}-T_{m}} < \varepsilon, \quad n,m\ge N_{\varepsilon}. \label{eq: T Cauchy}
+\end{align*}
+Let $x\in X$. It can be checked that $(T_{n}x)_{n\in \N}$ is a Cauchy sequence in $Y$. Since $Y$ is a Banach space, there exists a $y_{x}\in Y$ such that $\lim_{n\to \infty}\n{T_{n}x-y_{x}}=0$. Set $Tx:=y_{x}$. It can be shown that $T$ is a well-defined linear map, which is actually bounded. This last assertion following from the fact that
+\begin{align*}
+	\n{Tx} = \lim_{n\to \infty} \n{T_{n}x} \le \sup\{ \n{T_{n}} | n \ge 1 \} \n{x}
+\end{align*}
+where $\sup\{ \n{T_{n}} | n \ge 1 \}<\infty$ since $(T_{n})_{n\in \N}$ is a Cauchy sequence in $\m{L}(X,Y)$.
+
+So let $\varepsilon > 0$ be given, and let $N_{\varepsilon}>0$ be such that \eqref{eq: T Cauchy} holds. For an $x\in X$ and for all $n\ge N_{\varepsilon}$ we have
+\begin{align*}
+	\n{(T_{n}-T)x} = \n{T_{n}x - Tx} = \n{T_{n}x - \lim_{m\to \infty} T_{m}x} &= \lim_{m\to \infty} \n{T_{n}x-T_{m}x} \\
+	&\le \lim_{m\to \infty} (\n{T_{n}-T_{m}}\n{x}) \le \varepsilon \n{x}
+\end{align*}
+This shows that $\n{T_{n}-T}\le \varepsilon$ for all $n\ge N_{\varepsilon}$, and we are done.
+\end{proof}
+
+\begin{corollary}
+If $X$ is a normed vector space over $\K$, then
+\begin{align*}
+	X^{*}:=\m{L}(X,\K)
+\end{align*}
+is a Banach space called the dual space of $X$.
+\end{corollary}
+
+% Definition 1.14? Isometric isomorphism
+
+% Notes on the double dual X**? 2.7 (c) and (d)
+
+%%%%%%%%%%%%%%%%   Weak- and Weak*-topology  %%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%   Banach-Alaoglu  %%%%%%%%%%%%%%%%
+
+
+\begin{theorem}{Banach-Alaoglu's theorem}
+If $X$ is a normed vector space, then the closed unit ball $\overline{B}_{X^{*}}(0,1)=\{f\in X^{*} | \n{f}\le 1\}$ in $X^{*}$ is compact in the $w^{*}$-topology.
+\end{theorem}
+\begin{proof}
+
+\end{proof}
+
+
+
+
+\begin{definition}
+Let $X$ be a vector space over $\mathbb{K}$ $(=\C$ or $\R)$, and $K\subseteq X$ a non-empty convex subset. A point $x \in K$ is an \textbf{extreme point} of $K$ if for all $x_{1},x_{2}\in K$ and $\alpha \in (0,1)$ such that $x=\alpha x_{1} + (1-\alpha) x_{2}$, it follows that $x=x_{1}=x_{2}$. Let $\Ext(K)$ denote the set of all extreme points of $K$.
+\end{definition}
+
+
+
+\begin{theorem}[Krein-Milman]
+Let $K$ be a non-empty, compact, convex subset of a locally convex (Hausdorff) topological vector space $(X, \tau)$ over $\mathbb{K}$. Then:
+\begin{enumerate}
+\item $\Ext(K) \neq \emptyset.$
+\item $K = \overline{ \co( \Ext( K ) ) }^{\tau}$
+\end{enumerate}
+\end{theorem}
+
+
+
+
+$w^{*}$-topologi, compactness, convexity, affine map, Krein-millman (convex hull perhaps), extreme points. Banach-Alaoglu. Tychonoff
+
+
